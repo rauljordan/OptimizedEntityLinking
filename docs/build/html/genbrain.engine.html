@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Engine Package &mdash; genbrain 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="genbrain 0.1.0 documentation" href="index.html" />
+    <link rel="prev" title="Genbrain Package" href="genbrain.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="genbrain.html" title="Genbrain Package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">genbrain 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="engine-package">
+<h1>Engine Package<a class="headerlink" href="#engine-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-genbrain.engine.DBN">
+<span id="dbn-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">DBN</span></code> Module<a class="headerlink" href="#module-genbrain.engine.DBN" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="genbrain.engine.DBN.DBN">
+<em class="property">class </em><code class="descclassname">genbrain.engine.DBN.</code><code class="descname">DBN</code><span class="sig-paren">(</span><em>numpy_rng, theano_rng=None, n_ins=784, hidden_layers_sizes=[500, 500], n_outs=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/genbrain/engine/DBN.html#DBN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genbrain.engine.DBN.DBN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Deep Belief Network</p>
+<p>A deep belief network is obtained by stacking several RBMs on top of each
+other. The hidden layer of the RBM at layer <cite>i</cite> becomes the input of the
+RBM at layer <cite>i+1</cite>. The first layer RBM gets as input the input of the
+network, and the hidden layer of the last RBM represents the output. When
+used for classification, the DBN is treated as a MLP, by adding a logistic
+regression layer on top.</p>
+<dl class="method">
+<dt id="genbrain.engine.DBN.DBN.build_finetune_functions">
+<code class="descname">build_finetune_functions</code><span class="sig-paren">(</span><em>datasets</em>, <em>batch_size</em>, <em>learning_rate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/genbrain/engine/DBN.html#DBN.build_finetune_functions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genbrain.engine.DBN.DBN.build_finetune_functions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a function <cite>train</cite> that implements one step of
+finetuning, a function <cite>validate</cite> that computes the error on a
+batch from the validation set, and a function <cite>test</cite> that
+computes the error on a batch from the testing set</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>datasets</strong> (<em>list of pairs of theano.tensor.TensorType</em>) &#8211; It is a list that contain all the datasets;
+the has to contain three pairs, <cite>train</cite>,
+<cite>valid</cite>, <cite>test</cite> in this order, where each pair
+is formed of two Theano variables, one for the
+datapoints, the other for the labels</li>
+<li><strong>batch_size</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; size of a minibatch</li>
+<li><strong>learning_rate</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; learning rate used during finetune stage</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="genbrain.engine.DBN.DBN.pretraining_functions">
+<code class="descname">pretraining_functions</code><span class="sig-paren">(</span><em>train_set_x</em>, <em>batch_size</em>, <em>k</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/genbrain/engine/DBN.html#DBN.pretraining_functions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genbrain.engine.DBN.DBN.pretraining_functions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a list of functions, for performing one step of
+gradient descent at a given layer. The function will require
+as input the minibatch index, and to train an RBM you just
+need to iterate, calling the corresponding function on all
+minibatch indexes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>train_set_x</strong> (<em>theano.tensor.TensorType</em>) &#8211; Shared var. that contains all datapoints used
+for training the RBM</li>
+<li><strong>batch_size</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; size of a [mini]batch</li>
+<li><strong>k</strong> &#8211; number of Gibbs steps to do in CD-k / PCD-k</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="genbrain.engine.DBN.test_DBN">
+<code class="descclassname">genbrain.engine.DBN.</code><code class="descname">test_DBN</code><span class="sig-paren">(</span><em>finetune_lr=0.1</em>, <em>pretraining_epochs=100</em>, <em>pretrain_lr=0.01</em>, <em>k=1</em>, <em>training_epochs=1000</em>, <em>dataset='mnist.pkl.gz'</em>, <em>batch_size=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/genbrain/engine/DBN.html#test_DBN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#genbrain.engine.DBN.test_DBN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Demonstrates how to train and test a Deep Belief Network.</p>
+<p>This is demonstrated on MNIST.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>finetune_lr</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; learning rate used in the finetune stage</li>
+<li><strong>pretraining_epochs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of epoch to do pretraining</li>
+<li><strong>pretrain_lr</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; learning rate to be used during pre-training</li>
+<li><strong>k</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of Gibbs steps in CD/PCD</li>
+<li><strong>training_epochs</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; maximal number of iterations ot run the optimizer</li>
+<li><strong>dataset</strong> (<a class="reference external" href="http://docs.python.org/library/string.html#module-string" title="(in Python v2.7)"><em>string</em></a>) &#8211; path the the pickled dataset</li>
+<li><strong>batch_size</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; the size of a minibatch</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Engine Package</a><ul>
+<li><a class="reference internal" href="#module-genbrain.engine.DBN"><code class="docutils literal"><span class="pre">DBN</span></code> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="genbrain.html"
+                        title="previous chapter">Genbrain Package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/genbrain.engine.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="genbrain.html" title="Genbrain Package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">genbrain 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Raul Jordan.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
