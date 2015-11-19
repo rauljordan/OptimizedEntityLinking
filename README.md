@@ -26,3 +26,10 @@ GetSuccessors:
 
 Which words in an input should we choose to link?
 
+### Search Formalism
+ - States:
+  List of keywords with their assigned links
+ - Actions:
+  Assign one link
+ - 
+
