@@ -17,7 +17,14 @@ class BreadthFirstSearchLinker(object):
         self.words = words
 
     def search(self):
-        return 1
+        frontier = []
+        explored = []
+        frontier.append(self.words)
+        while frontier:
+            node = frontier.pop()
+            for child in self.relevance(node):
+                
+
 
 
 class EntityLinker(object):
