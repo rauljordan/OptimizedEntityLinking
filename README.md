@@ -25,8 +25,9 @@ GetSuccessors:
  - Simply go to disambiguation page for that noun
 
 Which words in an input should we choose to link?
-Given two links, how related are thy?
+Given two links, how related are they?
 Given a word and a link, how related is the word to that link? (how many times does word appear in linked page?)
+Given a list of possible states (return value of GetSuccessors) how can we filter the results to relate to the original input?
 
 ### Search Formalism
  - States:
