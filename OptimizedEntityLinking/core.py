@@ -45,4 +45,4 @@ class EntityLinker(object):
 
 if __name__ == '__main__':
     el = EntityLinker('dfs')
-    el.link('airplane wing dog')
+    el.link('airplane')

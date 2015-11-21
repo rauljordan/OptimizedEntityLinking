@@ -1,3 +1,4 @@
 
-def relevanceMain(w1, w2):
-    return 1
+def relevanceFunction(word, assignment):
+    if assignment == "Airplane":
+        return 0.6

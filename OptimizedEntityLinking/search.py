@@ -1,7 +1,8 @@
 import util
 import random
 from copy import deepcopy
-
+import relevance
+import wikipedia as wk
 
 class SearchAgent(object):
     """breadth first search algorithm for entity linking"""
@@ -13,22 +14,31 @@ class SearchAgent(object):
         A goal state is reached when every word is assigned a link
         """
         assignments = state.values()
-        return all(assignments)
+        if all(assignments):
+            # Checks that every word has a relevance above 0.5
+            for word, assignment in state.items():
+                if relevance.relevanceFunction(word, assignment) < 0.5:
+                    return False
+            return True
+        return False
 
     def mostConstrained(self, state):
         """Gets the variable with the most assignments constraining it.
         the one that has the smallest state space of possible links it could
         take"""
-        notAssigned = [key for key in state if state[key] is None]
+        notAssigned = state.keys()
         return random.choice(notAssigned)
 
     def getSuccessors(self, state):
 
         mostConstrained = self.mostConstrained(state)
 
-        assignment = 'www.wikipedia.org/Airplane'
+        successors = []
+        for wikipediaPage in wk.search(mostConstrained):
+            assignment = (mostConstrained, wikipediaPage)
+            successors.append(assignment)
 
-        return [(mostConstrained, assignment)]
+        return successors
 
     def breadthFirstSearch(self):
         """
@@ -36,14 +46,12 @@ class SearchAgent(object):
         """
         initialState = self.initialState
         explored = []
-        frontier = util.Queue()
-        frontier.push(initialState)
+        frontier = []
+        frontier.insert(0, initialState)
 
-        if self.isGoalState(initialState):
-            return initialState
-
-        while not frontier.isEmpty():
+        while len(frontier) != 0:
             currentState = frontier.pop()
+
             if currentState not in explored:
 
                 explored.append(currentState)
@@ -60,7 +68,8 @@ class SearchAgent(object):
 
                     nextState[mostConstrained] = assignment
 
-                    frontier.push(nextState)
+
+                    frontier.insert(0, nextState)
                     print frontier
         return []
 
@@ -70,18 +79,17 @@ class SearchAgent(object):
         """
         initialState = self.initialState
         explored = []
-        frontier = util.Stack()
-        frontier.push(initialState)
+        frontier = []
+        frontier.append(initialState)
 
-        if self.isGoalState(initialState):
-            return initialState
 
-        while not frontier.isEmpty():
+        while len(frontier) != 0:
             currentState = frontier.pop()
             if currentState not in explored:
 
                 explored.append(currentState)
 
+                print frontier
                 if self.isGoalState(currentState):
                     return currentState
 
@@ -94,7 +102,8 @@ class SearchAgent(object):
 
                     nextState[mostConstrained] = assignment
 
-                    frontier.push(nextState)
+                    frontier.append(nextState)
+
         return []
 
     def uniformCostSearch(self):
@@ -110,6 +119,7 @@ class SearchAgent(object):
 
         while not frontier.isEmpty():
             (current_state, actions, costs) = frontier.pop()
+
             if current_state not in explored:
                 explored.append(current_state)
                 if self.isGoalState(current_state):
