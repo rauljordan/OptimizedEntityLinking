@@ -1,66 +1,100 @@
 import util
+import random
+from copy import deepcopy
+
 
 class SearchAgent(object):
     """breadth first search algorithm for entity linking"""
     def __init__(self, words):
-        self.words = words
+        self.initialState = words
+
+    def isGoalState(self, state):
+        """
+        A goal state is reached when every word is assigned a link
+        """
+        assignments = state.values()
+        return all(assignments)
+
+    def mostConstrained(self, state):
+        """Gets the variable with the most assignments constraining it.
+        the one that has the smallest state space of possible links it could
+        take"""
+        notAssigned = [key for key in state if state[key] is None]
+        return random.choice(notAssigned)
+
+    def getSuccessors(self, state):
+
+        mostConstrained = self.mostConstrained(state)
+
+        assignment = 'www.wikipedia.org/Airplane'
+
+        return [(mostConstrained, assignment)]
 
     def breadthFirstSearch(self):
         """
         Search the shallowest nodes in the search tree first.
         """
-        start_node = (self.getStartState(), [], 0)
+        initialState = self.initialState
         explored = []
         frontier = util.Queue()
-        frontier.push(start_node)
+        frontier.push(initialState)
 
-        if self.isGoalState(self.getStartState()):
-            return []
+        if self.isGoalState(initialState):
+            return initialState
 
         while not frontier.isEmpty():
-            (current_state, actions, costs) = frontier.pop()
-            if current_state not in explored:
-                explored.append(current_state)
-                if problem.isGoalState(current_state):
-                    return actions
-                for child_node in self.getSuccessors(current_state):
-                    next_state = child_node[0]
-                    next_action = child_node[1]
-                    next_cost = child_node[2]
+            currentState = frontier.pop()
+            if currentState not in explored:
 
-                    next_node = (next_state, actions + [next_action], costs + next_cost)
-                    frontier.push(next_node)
+                explored.append(currentState)
+
+                if self.isGoalState(currentState):
+                    return currentState
+
+                # Gets the possible actions for the most constrained word
+                for successor in self.getSuccessors(currentState):
+
+                    nextState = deepcopy(currentState)
+                    mostConstrained = successor[0]
+                    assignment = successor[1]
+
+                    nextState[mostConstrained] = assignment
+
+                    frontier.push(nextState)
+                    print frontier
         return []
 
     def depthFirstSearch(self):
         """
         Search the deepest nodes in the search tree first
         """
-        start_node = (self.getStartState(), [], 0)
+        initialState = self.initialState
         explored = []
         frontier = util.Stack()
-        frontier.push(start_node)
+        frontier.push(initialState)
 
-        if self.isGoalState(self.getStartState()):
-            return []
+        if self.isGoalState(initialState):
+            return initialState
 
         while not frontier.isEmpty():
-            (current_state, actions, costs) = frontier.pop()
-            if current_state not in explored:
+            currentState = frontier.pop()
+            if currentState not in explored:
 
-                explored.append(current_state)
-                if self.isGoalState(current_state):
-                    return actions
-                else:
-                    return []
+                explored.append(currentState)
 
-                for child_node in self.getSuccessors(current_state):
-                    next_state = child_node[0]
-                    next_action = child_node[1]
-                    next_cost = child_node[2]
+                if self.isGoalState(currentState):
+                    return currentState
 
-                    next_node = (next_state, actions + [next_action], costs + next_cost)
-                    frontier.push(next_node)
+                # Gets the possible actions for the most constrained word
+                for successor in self.getSuccessors(currentState):
+
+                    nextState = deepcopy(currentState)
+                    mostConstrained = successor[0]
+                    assignment = successor[1]
+
+                    nextState[mostConstrained] = assignment
+
+                    frontier.push(nextState)
         return []
 
     def uniformCostSearch(self):
