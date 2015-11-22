@@ -11,34 +11,76 @@ class SearchAgent(object):
 
     def isGoalState(self, state):
         """
-        A goal state is reached when every word is assigned a link
+        A goal state is reached when every word has a link that has at least
+        0.5 relevance
         """
         assignments = state.values()
-        if all(assignments):
-            # Checks that every word has a relevance above 0.5
-            for word, assignment in state.items():
-                if relevance.relevanceFunction(word, assignment) < 0.5:
-                    return False
-            return True
-        return False
+        for link, relevanceScore in state.values():
+            if relevanceScore < 0.5:
+                return False
+        return True
+
 
     def mostConstrained(self, state):
         """Gets the variable with the most assignments constraining it.
         the one that has the smallest state space of possible links it could
         take"""
-        notAssigned = state.keys()
-        return random.choice(notAssigned)
+        keywords = state.keys()
+        return random.choice(keywords)
 
     def getSuccessors(self, state):
+        """
+        Returns a list of successors where each item is a triple containing
+        the most constrained keyword in the state, a wikipedia page that could be
+        assigned to it, and the relevance score of that wikipedia page to that
+        keyword
 
+        Example: state = {'airplane':(None, 0)}
+        return [('airplane', 'www.wikipedia.org/Airplane', 0.9),
+                ('airplane', 'www.wikipedia.org/Jefferson_Airplane_Accident', 0.3)]
+        """
         mostConstrained = self.mostConstrained(state)
 
         successors = []
         for wikipediaPage in wk.search(mostConstrained):
-            assignment = (mostConstrained, wikipediaPage)
+            relevanceScore = relevance.relevanceFunction(mostConstrained, wikipediaPage)
+            assignment = (mostConstrained, wikipediaPage, relevanceScore)
             successors.append(assignment)
 
         return successors
+
+    def depthFirstSearch(self):
+        """
+        Search the deepest nodes in the search tree first
+        """
+        initialState = self.initialState
+        explored = []
+        frontier = []
+        frontier.append(initialState)
+
+
+        while frontier:
+            currentState = frontier.pop()
+            if currentState not in explored:
+
+                explored.append(currentState)
+
+                if self.isGoalState(currentState):
+                    return currentState
+
+                # Gets the possible actions for the most constrained word
+                for successor in self.getSuccessors(currentState):
+
+                    nextState = deepcopy(currentState)
+                    mostConstrained = successor[0]
+                    assignment = successor[1]
+                    relevanceScore = successor[2]
+
+                    nextState[mostConstrained] = (assignment, relevanceScore)
+                    if nextState not in frontier:
+                        frontier.append(nextState)
+        return []
+
 
     def breadthFirstSearch(self):
         """
@@ -66,45 +108,13 @@ class SearchAgent(object):
                     mostConstrained = successor[0]
                     assignment = successor[1]
 
-                    nextState[mostConstrained] = assignment
+                    nextState[mostConstrained] = (assignment, 0)
 
 
                     frontier.insert(0, nextState)
                     print frontier
         return []
 
-    def depthFirstSearch(self):
-        """
-        Search the deepest nodes in the search tree first
-        """
-        initialState = self.initialState
-        explored = []
-        frontier = []
-        frontier.append(initialState)
-
-
-        while len(frontier) != 0:
-            currentState = frontier.pop()
-            if currentState not in explored:
-
-                explored.append(currentState)
-
-                print frontier
-                if self.isGoalState(currentState):
-                    return currentState
-
-                # Gets the possible actions for the most constrained word
-                for successor in self.getSuccessors(currentState):
-
-                    nextState = deepcopy(currentState)
-                    mostConstrained = successor[0]
-                    assignment = successor[1]
-
-                    nextState[mostConstrained] = assignment
-
-                    frontier.append(nextState)
-
-        return []
 
     def uniformCostSearch(self):
         "Search the node of least total cost first. "
