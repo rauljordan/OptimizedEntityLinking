@@ -25,9 +25,16 @@ class EntityLinker(object):
         if self.searchFun == 'dfs':
             searchAgent = search.SearchAgent(self.words)
             result = searchAgent.depthFirstSearch()
-            print result
+            print self.prettify(result)
         print 'Finished in 10 seconds'
 
+    def prettify(self, state):
+        """Prettifies the links in a terminal state"""
+        for k, v in state.items():
+            wikipediaLink = 'en.wikipedia.org/wiki/' + v[0]
+            state[k] = (wikipediaLink, v[1])
+        return state
+        
     def preprocess(self, words):
         """Preprocesses the input string to obtain an array
         of tuples where each word is initially linked to None.

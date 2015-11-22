@@ -1,8 +1,8 @@
 
 def relevanceFunction(keyword, link):
-    if link == "Jefferson Airplane discography":
+    if link == "Airplane":
         return 0.9
-    if link == "Australian Cattle Dog":
+    if link == "Dog":
         return 0.9
     else:
         return 0.1

@@ -33,7 +33,9 @@ class SearchAgent(object):
         Returns a list of successors where each item is a triple containing
         the most constrained keyword in the state, a wikipedia page that could be
         assigned to it, and the relevance score of that wikipedia page to that
-        keyword
+        keyword.
+
+        wk.search(keyword)
 
         Example: state = {'airplane':(None, 0)}
         return [('airplane', 'www.wikipedia.org/Airplane', 0.9),
@@ -91,7 +93,7 @@ class SearchAgent(object):
         frontier = []
         frontier.insert(0, initialState)
 
-        while len(frontier) != 0:
+        while frontier:
             currentState = frontier.pop()
 
             if currentState not in explored:
@@ -110,8 +112,9 @@ class SearchAgent(object):
 
                     nextState[mostConstrained] = (assignment, 0)
 
+                    if nextState not in frontier:
+                        frontier.insert(0, nextState)
 
-                    frontier.insert(0, nextState)
                     print frontier
         return []
 
