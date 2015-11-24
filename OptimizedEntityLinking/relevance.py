@@ -29,7 +29,7 @@ def relevanceFunction(keyword, link):
 	content = p.content
 
 	# get number of times keyword appears
-	apeears = len(content.split(keyword)) - 1
+	appears = len(content.split(keyword)) - 1
 
 	# return ratio of how often word appears to total length
 	# of the content.
