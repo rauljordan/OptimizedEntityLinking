@@ -25,9 +25,16 @@ def relevanceFunction(keyword, link):
 	# get associated page:
 	p = wikipedia.page(link_title)
 
-	# return the number of times the keyword appears in the content.
-	return (len(p.content.split(keyword)) - 1)
-	
+	# get content
+	content = p.content
+
+	# get number of times keyword appears
+	apeears = len(content.split(keyword)) - 1
+
+	# return ratio of how often word appears to total length
+	# of the content.
+	return appears / len(content)
+
     # if link == "Airplane":
     #     return 0.9
     # if link == "Dog":
