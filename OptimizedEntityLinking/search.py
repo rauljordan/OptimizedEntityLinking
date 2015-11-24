@@ -1,7 +1,7 @@
 import util
 import random
 from copy import deepcopy
-import relevance
+from relevance import RelevanceModel
 import wikipedia as wk
 
 class SearchAgent(object):
@@ -16,7 +16,7 @@ class SearchAgent(object):
         """
         assignments = state.values()
         for link, relevanceScore in state.values():
-            if relevanceScore < 0.5:
+            if relevanceScore < 0.0016:
                 return False
         return True
 
@@ -45,7 +45,7 @@ class SearchAgent(object):
 
         successors = []
         for wikipediaPage in wk.search(mostConstrained):
-            relevanceScore = relevance.relevanceFunction(mostConstrained, wikipediaPage)
+            relevanceScore = RelevanceModel.naiveRelevance(mostConstrained, wikipediaPage)
             assignment = (mostConstrained, wikipediaPage, relevanceScore)
             successors.append(assignment)
 

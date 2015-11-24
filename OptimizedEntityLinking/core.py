@@ -10,7 +10,6 @@ access to the different relevance function classes
 """
 
 import search
-import relevance
 
 class EntityLinker(object):
     """Implements the base entity linking class
@@ -34,7 +33,7 @@ class EntityLinker(object):
             wikipediaLink = 'en.wikipedia.org/wiki/' + v[0]
             state[k] = (wikipediaLink, v[1])
         return state
-        
+
     def preprocess(self, words):
         """Preprocesses the input string to obtain an array
         of tuples where each word is initially linked to None.
