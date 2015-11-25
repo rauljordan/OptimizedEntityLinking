@@ -45,7 +45,7 @@ class SearchAgent(object):
 
         successors = []
         for wikipediaPage in wk.search(mostConstrained):
-            relevanceScore = RelevanceModel.naiveRelevance(mostConstrained, wikipediaPage)
+            relevanceScore = RelevanceModel.naiveRelevance(state, mostConstrained, wikipediaPage)
             assignment = (mostConstrained, wikipediaPage, relevanceScore)
             successors.append(assignment)
 
