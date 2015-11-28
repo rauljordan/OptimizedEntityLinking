@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.11)  13 NOV 2015 22:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.11)  27 NOV 2015 22:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -117,144 +117,95 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
-
-! Undefined control sequence.
-l.44 ...evant to recent systems such as Facebook\‚
-                                                  Äôs \‚ÄúM\‚Äù
-? 
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ô in font cmr10!
-! Undefined control sequence.
-l.44 ...to recent systems such as Facebook\‚Äôs \‚
-                                                  ÄúM\‚Äù
-? 
+Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ú in font cmr10!
-! Undefined control sequence.
-l.44 ...cent systems such as Facebook\‚Äôs \‚ÄúM\‚
-                                                  Äù
-? 
+Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
 
-LaTeX Warning: Citation `papad' on page 25 undefined. on input line 55.
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 51.
 
-LaTeX Warning: Citation `simmons-aaai88' on page 25 undefined. on input line 58
-.
-
-
-LaTeX Warning: Citation `hacker' on page 25 undefined. on input line 58.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 44--61
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 44--61
-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 61.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 61.
- [25{/usr/local/texlive/2015basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 51.
+ [1{/usr/local/texlive/2015basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-
-LaTeX Warning: Citation `min-aaai' on page 26 undefined. on input line 65.
-
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 75.
+(Font)              <10.95> on input line 57.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 75.
+(Font)              <8> on input line 57.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 75.
+(Font)              <6> on input line 57.
+ [2]
+Underfull \hbox (badness 10000) in paragraph at lines 73--76
 
-LaTeX Warning: Citation `adorf' on page 26 undefined. on input line 92.
+ []
 
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ú in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ù in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ô in font cmr10!
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 88--91
 
-LaTeX Warning: Citation `johnston' on page 26 undefined. on input line 92.
-
-
-LaTeX Warning: Citation `mj-early' on page 26 undefined. on input line 124.
-
-
-LaTeX Warning: Citation `sam' on page 26 undefined. on input line 124.
-
-
-LaTeX Warning: Citation `adorf' on page 26 undefined. on input line 146.
-
-
-LaTeX Warning: Citation `johnston' on page 26 undefined. on input line 146.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [26]
-
-LaTeX Warning: Citation `stones' on page 27 undefined. on input line 157.
+ []
 
 
-LaTeX Warning: Citation `hopfield' on page 27 undefined. on input line 159.
+Underfull \hbox (badness 10000) in paragraph at lines 91--99
 
+ []
 
-Underfull \vbox (badness 2229) has occurred while \output is active []
+[4]
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ô in font cmr10!
 
- [27]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 235.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 235.
+Underfull \hbox (badness 10000) in paragraph at lines 111--114
 
-[28]
+ []
 
-LaTeX Warning: Citation `ginsberg' on page 29 undefined. on input line 370.
+[5]
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ô in font cmr10!
 
-
-LaTeX Warning: Citation `langley' on page 29 undefined. on input line 370.
-
-
-LaTeX Warning: Citation `brassard' on page 29 undefined. on input line 378.
-
-[29] [30]
 No file OptimizedEntityLinking.bbl.
-[31] [32] (./OptimizedEntityLinking.aux) ) 
+[6] (./OptimizedEntityLinking.aux) ) 
 Here is how much of TeX's memory you used:
- 687 strings out of 494501
- 8156 string characters out of 6167030
- 77662 words of memory out of 5000000
- 3996 multiletter control sequences out of 15000+600000
+ 649 strings out of 494501
+ 7787 string characters out of 6167030
+ 63587 words of memory out of 5000000
+ 3958 multiletter control sequences out of 15000+600000
  19589 words of font info for 74 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 23i,8n,22p,1099b,351s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015basic/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015basic/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015basic
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2015
-basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/
-2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texli
-ve/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/te
-xlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local
-/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/loc
-al/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
-ocal/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr
-/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
-/usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
-b></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti1
-0.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mtt10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmtt12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfo
-nts/latxfont/lcircle1.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/
-public/amsfonts/latxfont/line10.pfb>
-Output written on OptimizedEntityLinking.pdf (8 pages, 209031 bytes).
+ 23i,8n,22p,1407b,214s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015basic/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015basic/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015basic/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2015basic/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015ba
+sic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/20
+15basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive
+/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
+ive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/te
+xlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loca
+l/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/l
+ocal/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on OptimizedEntityLinking.pdf (6 pages, 164271 bytes).
 PDF statistics:
- 99 PDF objects out of 1000 (max. 8388607)
- 71 compressed objects within 1 object stream
+ 67 PDF objects out of 1000 (max. 8388607)
+ 47 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
