@@ -1,0 +1,7 @@
+
+TODOS in order of priority:
+------
+non-naiive relevance function
+TFIDF
+alchemy - identify keywords
+
