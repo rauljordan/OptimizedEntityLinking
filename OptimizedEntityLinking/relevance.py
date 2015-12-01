@@ -1,5 +1,53 @@
 from __future__ import division
-import wikipedia
+import wikipedia as wk
+import numpy as np
+import random
+import nltk
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+def similarity(A, B):
+    """Computes the cosine similarity of two vectors
+    :param A, B n-dimensional vectors represented as numpy arrays
+    :return value between 0 and 1
+    """
+    a = np.array(A)
+    b = np.array(B)
+
+    return np.dot(a, b) / (np.linalg.norm(a)*np.linalg.norm(b))
+
+
+def TFIDF(state, currentKeyword, link):
+    """
+    k = currentKeyword
+    p = wikipedia.page(link).content
+    state = {"airplane":(None, 0),"wing":(None, 0)}
+    """
+	# TF = sqrt(frequency of k in p)
+    p = wk.page(link).content.encode('utf-8').split()
+    TF = np.sqrt(p.count(currentKeyword))
+
+    context = [keyword for keyword in state.keys() if keyword != currentKeyword]
+    D = 0
+    relevants = 0
+    for key in context:
+        candidateLinks = wk.search(key)
+        D = len(candidateLinks)
+        for candidate in candidateLinks:
+            try:
+                page = wk.page(candidate, auto_suggest=True)
+            except wk.exceptions.DisambiguationError as e:
+                page = wk.page(random.choice(e.options))
+
+            if key in page.content.encode('utf-8').split():
+                relevants += 1
+
+    # add 1 to relevants and D to prevent log of -inf
+    IDF = np.log((D + 1 ) / (relevants + 1))
+
+
+    return TF * IDF
+
+
 
 
 class RelevanceModel(object):
@@ -9,6 +57,17 @@ class RelevanceModel(object):
     This class implements multiple approaches described from literature and
     explained in detail in the report
     """
+
+    @classmethod
+    def finalRelevance(self, keyword, link):
+        tfidf = TfidfVectorizer(stop_words='english')
+
+        weightedInput = tfidf.transform([keyword])
+        #weightedPage = tfidfvectorizer(page(keyword).content)
+        print weightedInput
+        #return similarity(weightedInput, weightedPage)
+
+
     @classmethod
     def naiveRelevance(self, state, keyword, link):
         # get associated page:
@@ -26,22 +85,10 @@ class RelevanceModel(object):
     	return appears / len(content)
 
     @classmethod
-    def wlmRelevance(self, keyword, link):
-        """
-        Implements a variant of the Wikipedia Link Based Measure model as a
-        driver for our relevance score as described in literature
-        """
-
-    def hmmRelevance(self, state, keyword, link):
-        """
-        OUR OPTIMIZATION
-
-        Framing the relevance problem as a Hidden Markov Model
-        where the emissions are the keywords and the hidden variables is a possible link. We want to find out P(X | E) where this will be our relevance score. The arrows between the values of X are a 'transition score' which will be our value of gamma in this case. We will weigh our relevance score by our transition score accordingly to obtain our final score.
-
-        This frames our problem probabilistically and allows us to use well-understood tools to solve the problem. Also, this optimizes our algorithm from the naive implementations we had before where we picked the most constrained keyword to assign. In this case, we can simply go left to right with our input to discover the best keyword to assign 
-        """
+    def fname(arg):
+        pass
 
 if __name__ == '__main__':
     """Including some simple unit tests for naive relevance"""
-    print RelevanceModel.naiveRelevance('airplane', 'Airplane')
+    #print TFIDF({"airplane":None, "wing":None}, 'airplane', 'Airplane')
+    print RelevanceModel.finalRelevance('airplane', None)
