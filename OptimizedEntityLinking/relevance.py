@@ -10,18 +10,56 @@ def similarity(A, B):
     :param A, B n-dimensional vectors represented as numpy arrays
     :return value between 0 and 1
     """
+
     a = np.array(A)
     b = np.array(B)
 
-    return np.dot(a, b) / (np.linalg.norm(a)*np.linalg.norm(b))
+    a_norm = np.linalg.norm(a)
+    b_norm = np.linalg.norm(b)
 
+    if a_norm == 0:
+        a_norm = 100000
+    if b_norm == 0:
+        b_norm = 100000
 
+    return np.dot(a, b) / (a_norm * b_norm)
+
+def newTFIDF(keyword, content):
+    # total number of wikipedia pages
+    D = 5021719
+    # approximates number of pages in all of wikipedia
+    # in which the keyword appears.
+    numberOfSearchResults = len(wk.search(keyword))
+    TF = np.sqrt(content.count(keyword))
+    IDF = np.log(D / numberOfSearchResults)
+    return TF * IDF
+
+def stateTFIDF(state, link):
+    """
+    Do the for loop, for each keyword. Return list of
+    TFIDF values
+    """
+    keywords = state.keys()
+    vals = []
+    page = wk.page(link).content.lower()
+    for keyword in keywords:
+        vals.append(newTFIDF(keyword, page))
+    return vals
+
+def inputTFIDF(state):
+    # return tfidf(keyword, state.keys())
+    text = ' '.join(state.keys()).lower()
+    vals = []
+    for keyword in state.keys():
+        vals.append(newTFIDF(keyword, text))
+
+    return vals
+
+"""
 def TFIDF(state, currentKeyword, link):
-    """
-    k = currentKeyword
-    p = wikipedia.page(link).content
-    state = {"airplane":(None, 0),"wing":(None, 0)}
-    """
+    # k = currentKeyword
+    # p = wikipedia.page(link).content
+    # state = {"airplane":(None, 0),"wing":(None, 0)}
 	# TF = sqrt(frequency of k in p)
     p = wk.page(link).content.encode('utf-8').split()
     TF = np.sqrt(p.count(currentKeyword))
@@ -46,7 +84,7 @@ def TFIDF(state, currentKeyword, link):
 
 
     return TF * IDF
-
+"""
 
 
 
@@ -59,13 +97,10 @@ class RelevanceModel(object):
     """
 
     @classmethod
-    def finalRelevance(self, keyword, link):
-        tfidf = TfidfVectorizer(stop_words='english')
-
-        weightedInput = tfidf.transform([keyword])
-        #weightedPage = tfidfvectorizer(page(keyword).content)
-        print weightedInput
-        #return similarity(weightedInput, weightedPage)
+    def finalRelevance(self, state, keyword, link):
+        A = stateTFIDF(state, link)
+        B = inputTFIDF(state)
+        return similarity(A, B)
 
 
     @classmethod
@@ -90,5 +125,13 @@ class RelevanceModel(object):
 
 if __name__ == '__main__':
     """Including some simple unit tests for naive relevance"""
-    print TFIDF({"airplane":None, "wing":None}, 'airplane', 'Airplane')
-    #print TFIDF('airplane', None)
+    inputText = 'airplane, dog, cat, fish, man, jacket, apple, christmas, theater, pet, napkin, egg, eyebrow, juice, palm tree, island'
+
+    state = {k:None for k in inputText.split(', ')}
+
+
+    keyword = "airplane"
+    for page in wk.search(keyword):
+        score = RelevanceModel.finalRelevance(state, keyword, page)
+
+        print 'Page ' + page + ' has score ' + str(score)
