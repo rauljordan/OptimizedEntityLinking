@@ -90,5 +90,5 @@ class RelevanceModel(object):
 
 if __name__ == '__main__':
     """Including some simple unit tests for naive relevance"""
-    #print TFIDF({"airplane":None, "wing":None}, 'airplane', 'Airplane')
-    print RelevanceModel.finalRelevance('airplane', None)
+    print TFIDF({"airplane":None, "wing":None}, 'airplane', 'Airplane')
+    #print TFIDF('airplane', None)

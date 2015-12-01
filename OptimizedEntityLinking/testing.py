@@ -50,4 +50,7 @@ if __name__ == '__main__':
 
     tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
     tfs = tfidf.fit_transform(token_dict.values())
-    print tfs
+
+    feature_names = tfidf.get_feature_names()
+    for col in tfs.nonzero()[1]:
+        print feature_names[col], ' - ', tfs[0, col]
