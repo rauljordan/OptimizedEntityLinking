@@ -9,6 +9,7 @@
 \usepackage{listings}
 \usepackage{color}
 
+
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -133,6 +134,7 @@ def mostConstrainedKeyword(state, alpha):
     return keyword with min(stateSpaces)
 \end{lstlisting}
 
+
 \subsection{The Relevance Function}
 Given a link, a keyword, and a current state, how do we determine if that link is the best fit for that keyword effectively using the context given to us? In our implementation, there is a crucial consideration: we must be able to somehow use previous assigned keywords as factors in our score. This means that given the content of a wikipedia link, we must use the current keyword and the keywords around it to gauge how good of a match that link is to our current keyword. To accomplish this task, we will discuss several implementations of different measures of semantic-relatedness and approaches that have been used in literature to take advantage of the structured corpora of wikipedia.
 \\ \\
@@ -172,13 +174,15 @@ in which a keyword appears (Salakhutdinov 2). Reducing the overhead of all these
 \subsection{Implementation Critique}
 Now we discuss Python-specific implementation critiques as well as additional constraints that our algorithmic choices add to our problem.
 \section{Algorithmic Limitations}
-Currently our search formulation is highly parameter-dependent. The accuracy of our entity-linking directly relies on the choice of $\gamma$ and $\psi$
+Currently our search formulation is highly parameter-dependent. The accuracy of our entity-linking directly relies on the choice of $\gamma$ (the relevance score threshold), which has to do with determining how high a value of a relevance score will determine a terminal state in the search problem, and $\psi$ (the linking-dependence threshold) which determines how related two keywords are to each other in a given state.
 
-Relies on choosing a threshold for how similar words are. It is parameter dependent on $\gamma$ and $\psi$.
+Additionally, our system only works for single-word entity linking. This means that we cannot link bigrams such as ``Steve Jobs'' or any n-grams for $n > 1$. The algorithms are also limited to the extent of how powerful the wikipedia API is to fetch the set of candidate links it believes best match a given keyword and we depend on this for the expansion of a node within the different search algorithms.
 
-n-grams in paragraphs. Currently our searching formulation only works for single-word entity linking.
 \section{System Feature Testing}
-Testing
+
+Our system testing will rely on measuring the running time of multiple examples provided to the system using 4 key metrics as described in (Citation Needed). We can now frame our parameter-based system as an optimization problem, where we find the optimal values of $\gamma$ and $\psi$ that maximize candidate accuracy for values from 0 to 1 in our system. We run our system and measure these different metrics 
+
+
 \section{Key Takeaways From Implementation}
 Takeaways
 \section{Empirical \& Graphical Results}
