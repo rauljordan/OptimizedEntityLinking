@@ -3,7 +3,7 @@ import wikipedia as wk
 import numpy as np
 import random
 import nltk
-from sklearn.feature_extraction.text import TfidfVectorizer
+import matplotlib.pyplot as plt
 
 def similarity(A, B):
     """Computes the cosine similarity of two vectors
@@ -86,8 +86,6 @@ def TFIDF(state, currentKeyword, link):
     return TF * IDF
 """
 
-
-
 class RelevanceModel(object):
     """
     Given a link, a keyword, and a current state, how do we figure out if that link is the best fit for that keyword effectively using the context given to us? In our implementation, there is a crucial consideration: we must be able to somehow use previous assigned keywords as factors in our score. This means that given the content of a wikipedia link, we must use the current keyword and the keywords around it to gauge how good of a match that link is to our current keyword.
@@ -101,7 +99,6 @@ class RelevanceModel(object):
         A = stateTFIDF(state, link)
         B = inputTFIDF(state)
         return similarity(A, B)
-
 
     @classmethod
     def naiveRelevance(self, state, keyword, link):
@@ -125,13 +122,31 @@ class RelevanceModel(object):
 
 if __name__ == '__main__':
     """Including some simple unit tests for naive relevance"""
-    inputText = 'airplane, dog, cat, fish, man, jacket, apple, christmas, theater, pet, napkin, egg, eyebrow, juice, palm tree, island'
+    inputText = 'airplane, dog, cat, fish, man, jacket, apple, christmas, theater, pet, napkin, egg, eyebrow, juice, palm tree, island'.split(', ')
+    inputLength = [i for i in range(len(inputText))]
+    variance = []
+    mean = []
+    maxscore = []
+    for i in range(len(inputText)):
+        state = {k:None for k in inputText[0:i]}
+        keyword = "airplane"
+        scores = []
+        for page in wk.search(keyword):
+            scores.append(RelevanceModel.finalRelevance(state, keyword, page))
+        variance.append(np.var(scores))
+        mean.append(np.mean(scores))
+        maxscore.append(max(scores))
 
-    state = {k:None for k in inputText.split(', ')}
+    # Plotting the relevance score variance vs. input length
+    plt.figure(1)
+    plt.plot(inputLength, variance, color='#009688')
+    plt.figure(2)
+    plt.plot(inputLength, mean, color='#FF0000')
+    plt.figure(3)
+    plt.plot(inputLength, maxscore, color='#00FF00')
+    plt.show()
 
 
-    keyword = "airplane"
-    for page in wk.search(keyword):
-        score = RelevanceModel.finalRelevance(state, keyword, page)
-
-        print 'Page ' + page + ' has score ' + str(score)
+    print variance
+    print mean
+    print maxscore

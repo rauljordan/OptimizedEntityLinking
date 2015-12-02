@@ -156,7 +156,7 @@ Where $\eta$ we define as the \textit{context} of a given keyword and \textit{Si
   \item weighing a term down if it appears frequently in multiple documents. This will meaan it is most likely not a unique keyword
 \end{enumerate}
 
-$$\mbox{TF-IDF} = \sqrt{f(k, p)} \cdot \log \left( \frac{|\mathcal{D}|}{\{d \in \mathcal{D} \ | \ t \in \mathcal{D}\}} \right) $$
+$$\mbox{TF-IDF} = \sqrt{f(k, p)} \cdot \log \left( \frac{|\mathcal{D}|}{\{d \in \mathcal{D} \ | \ k \in \mathcal{D}\}} \right) $$
 Where $k$ is the current keyword, $p$ is its candidate link's wikipedia page content, $f(k,p)$ is the term frequency of $k$ in $p$, $|\mathcal{D}|$ is the total number of wikipedia pages of the other keywords in the state, and $\{d \in \mathcal{D} \ | \ k \in d\}$ is the number of wikipedia pages corresponding to each of the other keywords that contain $k$ (Chisholm 149).
 
 The key to an effective relevance function will involve taking into account the similarity of the context of a given keyword to that keyword’s wikipedia entry using cosine similarity and encoding terms with TF-IDF weights. There are variations of this approach that have been successful in literature, but one that stands out over others (Citation Needed. It is the algorithm comparison paper) in terms of time and space complexity is known as Explicit Semantic Analysis. Dojchinovski provides a summary of the method, which we will work into our formulation and modify to implement our final relevance function through the following high-level description:
@@ -180,7 +180,7 @@ Additionally, our system only works for single-word entity linking. This means t
 
 \section{System Feature Testing}
 
-Our system testing will rely on measuring the running time of multiple examples provided to the system using 4 key metrics as described in (Citation Needed). We can now frame our parameter-based system as an optimization problem, where we find the optimal values of $\gamma$ and $\psi$ that maximize candidate accuracy for values from 0 to 1 in our system. We run our system and measure these different metrics 
+Our system testing will rely on measuring the running time of multiple examples provided to the system using 4 key metrics as described in (Citation Needed). We can now frame our parameter-based system as an optimization problem, where we find the optimal values of $\gamma$ and $\psi$ that maximize candidate accuracy for values from 0 to 1 in our system. We run our system and measure these different metrics
 
 
 \section{Key Takeaways From Implementation}
