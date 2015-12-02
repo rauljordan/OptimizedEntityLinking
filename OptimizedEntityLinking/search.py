@@ -16,7 +16,7 @@ class SearchAgent(object):
         """
         assignments = state.values()
         for link, relevanceScore in state.values():
-            if relevanceScore < 0.0016:
+            if relevanceScore < 0.9:
                 return False
         return True
 
@@ -45,7 +45,7 @@ class SearchAgent(object):
 
         successors = []
         for wikipediaPage in wk.search(mostConstrained):
-            relevanceScore = RelevanceModel.naiveRelevance(state, mostConstrained, wikipediaPage)
+            relevanceScore = RelevanceModel.finalRelevance(state, mostConstrained, wikipediaPage)
             assignment = (mostConstrained, wikipediaPage, relevanceScore)
             successors.append(assignment)
 

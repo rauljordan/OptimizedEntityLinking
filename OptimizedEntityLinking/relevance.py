@@ -41,7 +41,11 @@ def stateTFIDF(state, link):
     """
     keywords = state.keys()
     vals = []
-    page = wk.page(link).content.lower()
+    try:
+        page = wk.page(link).content.lower()
+    except wk.exceptions.DisambiguationError as e:
+        page = wk.page(random.choice(e.options)).content.lower()
+
     for keyword in keywords:
         vals.append(newTFIDF(keyword, page))
     return vals

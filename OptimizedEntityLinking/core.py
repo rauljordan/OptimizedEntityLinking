@@ -47,4 +47,4 @@ class EntityLinker(object):
 
 if __name__ == '__main__':
     el = EntityLinker()
-    el.link('airplane dog')
+    el.link('airplane aircraft')
