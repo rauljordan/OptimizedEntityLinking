@@ -59,36 +59,7 @@ def inputTFIDF(state):
 
     return vals
 
-"""
-def TFIDF(state, currentKeyword, link):
-    # k = currentKeyword
-    # p = wikipedia.page(link).content
-    # state = {"airplane":(None, 0),"wing":(None, 0)}
-	# TF = sqrt(frequency of k in p)
-    p = wk.page(link).content.encode('utf-8').split()
-    TF = np.sqrt(p.count(currentKeyword))
 
-    context = [keyword for keyword in state.keys() if keyword != currentKeyword]
-    D = 0
-    relevants = 0
-    for key in context:
-        candidateLinks = wk.search(key)
-        D = len(candidateLinks)
-        for candidate in candidateLinks:
-            try:
-                page = wk.page(candidate, auto_suggest=True)
-            except wk.exceptions.DisambiguationError as e:
-                page = wk.page(random.choice(e.options))
-
-            if key in page.content.encode('utf-8').split():
-                relevants += 1
-
-    # add 1 to relevants and D to prevent log of -inf
-    IDF = np.log((D + 1 ) / (relevants + 1))
-
-
-    return TF * IDF
-"""
 
 class RelevanceModel(object):
     """
