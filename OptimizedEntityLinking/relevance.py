@@ -4,25 +4,8 @@ import numpy as np
 import random
 import nltk
 import matplotlib.pyplot as plt
+from util import similarity
 
-def similarity(A, B):
-    """Computes the cosine similarity of two vectors
-    :param A, B n-dimensional vectors represented as numpy arrays
-    :return value between 0 and 1
-    """
-
-    a = np.array(A)
-    b = np.array(B)
-
-    a_norm = np.linalg.norm(a)
-    b_norm = np.linalg.norm(b)
-
-    if a_norm == 0:
-        a_norm = 100000
-    if b_norm == 0:
-        b_norm = 100000
-
-    return np.dot(a, b) / (a_norm * b_norm)
 
 def newTFIDF(keyword, content):
     # total number of wikipedia pages
@@ -34,30 +17,28 @@ def newTFIDF(keyword, content):
     IDF = np.log(D / numberOfSearchResults)
     return TF * IDF
 
-def stateTFIDF(state, link):
+def candidateLinkTFIDF(keywords, link):
     """
     Do the for loop, for each keyword. Return list of
     TFIDF values
     """
-    keywords = state.keys()
-    vals = []
+    TFIDFvals = []
     try:
         page = wk.page(link).content.lower()
     except wk.exceptions.DisambiguationError as e:
         page = wk.page(random.choice(e.options)).content.lower()
 
     for keyword in keywords:
-        vals.append(newTFIDF(keyword, page))
-    return vals
+        TFIDFvals.append(newTFIDF(keyword, page))
+    return TFIDFvals
 
-def inputTFIDF(state):
-    # return tfidf(keyword, state.keys())
-    text = ' '.join(state.keys()).lower()
-    vals = []
-    for keyword in state.keys():
-        vals.append(newTFIDF(keyword, text))
-
-    return vals
+def keywordsTFIDF(keywords):
+    text = ' '.join(keywords).lower()
+    TFIDFvals = []
+    for keyword in keywords:
+        score = newTFIDF(keyword, text)
+        TFIDFvals.append(score)
+    return TFIDFvals
 
 
 
@@ -70,30 +51,11 @@ class RelevanceModel(object):
     """
 
     @classmethod
-    def finalRelevance(self, state, keyword, link):
-        A = stateTFIDF(state, link)
-        B = inputTFIDF(state)
+    def relevance(self, keywords, link):
+        A = candidateLinkTFIDF(keywords, link)
+        B = keywordsTFIDF(keywords)
         return similarity(A, B)
 
-    @classmethod
-    def naiveRelevance(self, state, keyword, link):
-        # get associated page:
-    	p = wikipedia.page(link)
-
-    	# get content as a list of all words in page
-    	content = p.content.encode('utf-8').split()
-
-    	# get number of times keyword and other keywords appear
-        # in the cintent
-    	appears = content.count(keyword)
-
-    	# return ratio of how often word appears to total length
-    	# of the content. Will always return a very small relevance
-    	return appears / len(content)
-
-    @classmethod
-    def fname(arg):
-        pass
 
 if __name__ == '__main__':
     """Including some simple unit tests for naive relevance"""

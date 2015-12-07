@@ -170,7 +170,7 @@ Additionally, the relevance function subroutine utilizes TF-IDF in its implement
 in which a keyword appears (Salakhutdinov 2). Reducing the overhead of all these subroutines will be implementation-dependent and will only be practically efficient for a set of input text with very small cardinality.
 
 \subsection{Implementation Critique}
-Now we discuss Python-specific implementation critiques as well as additional constraints that our algorithmic choices add to our problem.
+Our implementation is highly constrained by the rate-limit and speed of the API calls we use from the Wikipedia python library.
 \section{Algorithmic Limitations}
 Currently our search formulation is highly parameter-dependent. The accuracy of our entity-linking directly relies on the choice of $\gamma$ (the relevance score threshold), which has to do with determining how high a value of a relevance score will determine a terminal state in the search problem, and $\psi$ (the linking-dependence threshold) which determines how related two keywords are to each other in a given state.
 

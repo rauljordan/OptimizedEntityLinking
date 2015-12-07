@@ -9,6 +9,29 @@ heuristics used in the project
 """
  Data structures useful for implementing SearchAgents
 """
+
+import numpy as np
+
+def similarity(A, B):
+    """Computes the cosine similarity of two vectors
+    :param A, B n-dimensional vectors represented as numpy arrays
+    :return value between 0 and 1
+    """
+
+    a = np.array(A)
+    b = np.array(B)
+
+    a_norm = np.linalg.norm(a)
+    b_norm = np.linalg.norm(b)
+
+    if a_norm == 0:
+        a_norm = 100000
+    if b_norm == 0:
+        b_norm = 100000
+
+    return np.dot(a, b) / (a_norm * b_norm)
+
+
 import heapq
 
 class Stack:

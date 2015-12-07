@@ -14,17 +14,14 @@ import search
 class EntityLinker(object):
     """Implements the base entity linking class
     that can be called at runtime"""
-    def __init__(self, searchFun='dfs'):
-        self.searchFun = searchFun
 
     def link(self, words):
         print 'Preprocessing Input...'
-        self.words = self.preprocess(words)
+        processedWords = self.preprocess(words)
         print 'Linking Input...'
-        if self.searchFun == 'dfs':
-            searchAgent = search.SearchAgent(self.words)
-            result = searchAgent.depthFirstSearch()
-            print self.prettify(result)
+        searchAgent = search.LocalSearch(processedWords)
+        result = searchAgent.run()
+        print self.prettify(result)
         print 'Finished in 10 seconds'
 
     def prettify(self, state):
@@ -42,7 +39,7 @@ class EntityLinker(object):
         This needs to find the keywords in our phrase! We need to address this
         issue
         """
-        return {word: (None, 0) for word in words.split()}
+        return words.split()
 
 
 if __name__ == '__main__':
