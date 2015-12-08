@@ -57,7 +57,7 @@ class LocalSearch(object):
         scoring link along with its relevance score"""
         relevances = []
         for candidateLink in wk.search(keyword):
-            score = RelevanceModel.relevance(self.keywords, candidateLink)
+            score = RelevanceModel.linkRelevance(self.keywords, candidateLink)
             relevances.append((candidateLink, score))
 
         # Returns the tuple with the highest relevance score in the array
