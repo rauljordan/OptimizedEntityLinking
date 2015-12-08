@@ -24,9 +24,12 @@ def candidateLinkTFIDF(keywords, link):
     """
     TFIDFvals = []
     try:
-        page = wk.page(link).content.lower()
+        page = wk.page(link, auto_suggest=True).content.lower()
     except wk.exceptions.DisambiguationError as e:
-        page = wk.page(random.choice(e.options)).content.lower()
+
+        options = filter(lambda x: "(disambiguation)" not in x, e.options)
+        print options
+        page = wk.page(random.choice(options), auto_suggest=True).content.lower()
 
     for keyword in keywords:
         TFIDFvals.append(newTFIDF(keyword, page))
@@ -45,7 +48,6 @@ def keywordsTFIDF(keywords):
 class RelevanceModel(object):
     """
     Given a link, a keyword, and a current state, how do we figure out if that link is the best fit for that keyword effectively using the context given to us? In our implementation, there is a crucial consideration: we must be able to somehow use previous assigned keywords as factors in our score. This means that given the content of a wikipedia link, we must use the current keyword and the keywords around it to gauge how good of a match that link is to our current keyword.
-
     This class implements multiple approaches described from literature and
     explained in detail in the report
     """

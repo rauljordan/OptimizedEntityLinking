@@ -53,4 +53,4 @@ class EntityLinker(object):
 
 if __name__ == '__main__':
     el = EntityLinker()
-    el.link('Steve Jobs was great at Apple')
+    el.link('Apple is Hitler and Apple is Kitty and Kitty is cute')
