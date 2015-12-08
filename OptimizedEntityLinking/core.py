@@ -10,6 +10,8 @@ access to the different relevance function classes
 """
 
 import search
+import nltk
+
 
 class EntityLinker(object):
     """Implements the base entity linking class
@@ -39,9 +41,16 @@ class EntityLinker(object):
         This needs to find the keywords in our phrase! We need to address this
         issue
         """
-        return words.split()
+        self.raw_words = words
+
+        pos = nltk.pos_tag(words.split())
+        keywords = [noun[0] for noun in pos
+                    if (noun[1] == 'NNP' or noun[1] == 'NN'
+                                        or noun[1] == 'NNS')]
+
+        return keywords
 
 
 if __name__ == '__main__':
     el = EntityLinker()
-    el.link('airplane aircraft')
+    el.link('Steve Jobs was great at Apple')
