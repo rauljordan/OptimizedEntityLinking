@@ -53,5 +53,4 @@ class EntityLinker(object):
 
 if __name__ == '__main__':
     el = EntityLinker()
-    el.link('Thermodynamics is the study of heat and heat-transfer')
-    el.link('Harvard University is the best university in the entire world')
+    el.link('Thermochemistry is the study of heat and heat-transfer')

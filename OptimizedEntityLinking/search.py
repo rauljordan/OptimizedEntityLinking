@@ -11,7 +11,33 @@ class LocalSearch(object):
         self.cachedPages = {}
 
     def run(self):
-        return self.getInitialState()
+        """ RUNS LOCAL SEARCH """
+        psiScores = []
+        initialState = self.getInitialState()
+
+
+        for keyword in self.keywords:
+            candidateLinks = wk.search(keyword)
+            context = [v for k, v in initialState.items() if k != keyword]
+
+            # For that candidate link, compare its page
+            # to all the other assigned pages, and keep track of their
+            # relevance scores inside of a relevance score
+            for candidateLink in candidateLinks:
+                for contextLink in context:
+                    # score = getTFIDF(candidateLink, contextLink)
+                    psiScores.append((candidateLink, 0.999999))
+
+            bestCandidateLink, bestPsiScore  = max(psiScores, key=lambda x: x[1])
+
+            relevanceOfBestCandidateLink = 0.99
+            if relevanceOfBestCandidateLink > initialState[keyword][1]:
+                # Replace!
+                initialState[keyword] = (bestCandidateLink, relevanceOfBestCandidateLink)
+
+
+
+        return initialState
 
     def getInitialState(self):
         """
@@ -21,8 +47,8 @@ class LocalSearch(object):
         """
         initialState = {}
         for keyword in self.keywords:
-            (link, score) = self.getMaxRelevance(keyword.lower())
-            initialState[keyword.lower()] = (link, score)
+            (link, score) = self.getMaxRelevance(keyword)
+            initialState[keyword] = (link, score)
         return initialState
 
     def getMaxRelevance(self, keyword):
