@@ -37,3 +37,22 @@ class RelevanceModel(object):
         vectorizer = TfidfVectorizer(tokenizer=normalize, stop_words='english')
         tfidf = vectorizer.fit_transform([inputText, linkText])
         return ((tfidf * tfidf.T).A)[0,1]
+
+    @classmethod
+    def documentRelevance(self, link1, link2):
+
+        try:
+            linkText1 = wk.page(link1, auto_suggest=False).content.lower()
+        except wk.exceptions.DisambiguationError as e:
+            options = filter(lambda x: "(disambiguation)" not in x, e.options)
+            linkText1 = wk.page(options[0], auto_suggest=False).content.lower()
+
+        try:
+            linkText2 = wk.page(link2, auto_suggest=False).content.lower()
+        except wk.exceptions.DisambiguationError as e:
+            options = filter(lambda x: "(disambiguation)" not in x, e.options)
+            linkText2 = wk.page(options[0], auto_suggest=False).content.lower()
+
+        vectorizer = TfidfVectorizer(tokenizer=normalize, stop_words='english')
+        tfidf = vectorizer.fit_transform([linkText1, linkText2])
+        return ((tfidf * tfidf.T).A)[0,1]

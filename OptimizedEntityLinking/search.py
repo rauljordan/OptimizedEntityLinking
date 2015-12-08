@@ -12,7 +12,7 @@ class LocalSearch(object):
 
     def run(self):
         """ RUNS LOCAL SEARCH """
-        psiScores = []
+        documentRelevanceScores = []
         initialState = self.getInitialState()
 
 
@@ -25,8 +25,8 @@ class LocalSearch(object):
             # relevance scores inside of a relevance score
             for candidateLink in candidateLinks:
                 for contextLink in context:
-                    # score = getTFIDF(candidateLink, contextLink)
-                    psiScores.append((candidateLink, 0.999999))
+                    documentRelevance = RelevanceModel.documentRelevance(candidateLink, contextLink)
+                    documentRelevanceScores.append((candidateLink, documentRelevance))
 
             bestCandidateLink, bestPsiScore  = max(psiScores, key=lambda x: x[1])
 
