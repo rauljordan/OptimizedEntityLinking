@@ -13,7 +13,9 @@ def newTFIDF(keyword, content):
     # approximates number of pages in all of wikipedia
     # in which the keyword appears.
     numberOfSearchResults = len(wk.search(keyword))
-    TF = np.sqrt(content.count(keyword))
+
+
+    TF = np.sqrt(content.count(keyword.lower()))
     IDF = np.log(D / numberOfSearchResults)
     return TF * IDF
 
@@ -24,12 +26,11 @@ def candidateLinkTFIDF(keywords, link):
     """
     TFIDFvals = []
     try:
-        page = wk.page(link, auto_suggest=True).content.lower()
+        page = wk.page(link, auto_suggest=False).content.lower()
     except wk.exceptions.DisambiguationError as e:
 
         options = filter(lambda x: "(disambiguation)" not in x, e.options)
-        print options
-        page = wk.page(random.choice(options), auto_suggest=True).content.lower()
+        page = wk.page(options[0], auto_suggest=False).content.lower()
 
     for keyword in keywords:
         TFIDFvals.append(newTFIDF(keyword, page))

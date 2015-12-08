@@ -21,8 +21,8 @@ class LocalSearch(object):
         """
         initialState = {}
         for keyword in self.keywords:
-            (link, score) = self.getMaxRelevance(keyword)
-            initialState[keyword] = (link, score)
+            (link, score) = self.getMaxRelevance(keyword.lower())
+            initialState[keyword.lower()] = (link, score)
         return initialState
 
     def getMaxRelevance(self, keyword):
