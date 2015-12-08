@@ -22,8 +22,9 @@ class EntityLinker(object):
         processedWords = self.preprocess(words)
         print 'Linking Input...'
         searchAgent = search.LocalSearch(processedWords)
-        result = searchAgent.run()
-        print self.prettify(result)
+        print searchAgent.getInitialState()
+        #result = searchAgent.run()
+        #print self.prettify(result)
         print 'Finished in 10 seconds'
 
     def prettify(self, state):
