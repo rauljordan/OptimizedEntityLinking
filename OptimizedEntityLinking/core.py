@@ -30,7 +30,7 @@ class EntityLinker(object):
         searchAgent = LocalSearch(processedWords, c)
         result = searchAgent.runLocalSearch(self.alpha, self.iterations)
         print self.prettify(result)
-
+        return result
 
     def prettify(self, state):
         """Prettifies the links in a terminal state"""
