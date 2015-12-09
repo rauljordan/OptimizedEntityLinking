@@ -12,6 +12,9 @@ with open('test/solutions.txt') as f:
     for line in f.readlines():
         solutions.append(ast.literal_eval(line))
 
+# print solutions[0]['Thermodynamics']
+# quit()
+
 with open('test/testset.txt') as f:
     avg_accuracies = []
     for alpha in alphas:
@@ -25,7 +28,11 @@ with open('test/testset.txt') as f:
             totalKeywords = len(result.keys())
             correctKeywords = 0
             for k in result:
-                if result[k][0] == currentSolution[k][0]:
+                print result[k][0]
+                print currentSolution[k]
+                print type(result[k][0])
+                print type(currentSolution[k])
+                if result[k][0] == currentSolution[k]:
                     correctKeywords += 1
 
             accuracies.append(correctKeywords / totalKeywords)
