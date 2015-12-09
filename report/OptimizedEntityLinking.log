@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.11)  9 DEC 2015 14:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.11)  9 DEC 2015 18:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -332,40 +332,47 @@ Underfull \hbox (badness 10000) in paragraph at lines 79--83
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 86--97
+Underfull \hbox (badness 10000) in paragraph at lines 86--98
 
  []
 
 
-Overfull \hbox (29.17133pt too wide) in paragraph at lines 86--97
+Overfull \hbox (29.17133pt too wide) in paragraph at lines 86--98
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--97
+Underfull \hbox (badness 10000) in paragraph at lines 86--98
 
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [3]
-Underfull \hbox (badness 10000) in paragraph at lines 119--122
+Underfull \hbox (badness 10000) in paragraph at lines 86--98
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 123--127
+Underfull \hbox (badness 10000) in paragraph at lines 86--98
 
  []
 
-[4] [5]
-Overfull \hbox (17.87518pt too wide) in paragraph at lines 167--168
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 120--123
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 124--128
+
+ []
+
+[5]
+Overfull \hbox (17.87518pt too wide) in paragraph at lines 168--169
 [][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (17.87518pt too wide) in paragraph at lines 168--170
+Overfull \hbox (17.87518pt too wide) in paragraph at lines 169--171
 [][][][][][][][][][][][][] 
  []
 
@@ -374,52 +381,55 @@ Underfull \vbox (badness 1067) has occurred while \output is active []
 
  [7]
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 239--248
+Underfull \hbox (badness 10000) in paragraph at lines 240--249
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--275
+Underfull \hbox (badness 10000) in paragraph at lines 255--276
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--275
+Underfull \hbox (badness 10000) in paragraph at lines 255--276
 
  []
 
 
-Overfull \hbox (13.11018pt too wide) in paragraph at lines 254--275
+Overfull \hbox (13.11018pt too wide) in paragraph at lines 255--276
 \OT1/cmr/m/n/10.95 we ob-tain [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--275
+Underfull \hbox (badness 10000) in paragraph at lines 255--276
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 254--275
+Underfull \hbox (badness 10000) in paragraph at lines 255--276
 
  []
 
 
-Overfull \hbox (13.11018pt too wide) in paragraph at lines 254--275
+Overfull \hbox (13.11018pt too wide) in paragraph at lines 255--276
 \OT1/cmr/m/n/10.95 we ob-tain [] 
  []
 
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 276--282
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9]
+Underfull \hbox (badness 10000) in paragraph at lines 277--283
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--282
+Underfull \hbox (badness 10000) in paragraph at lines 277--283
 
  []
 
 
-Overfull \hbox (7.23181pt too wide) detected at line 282
+Overfull \hbox (7.23181pt too wide) detected at line 283
 \OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 airplanes \OT1/cmr/m/n/10.95 :  (\OML/
 cmm/m/it/10.95 wikipedia:org=Airplane;  \OT1/cmr/m/n/10.95 0\OML/cmm/m/it/10.95
  :\OT1/cmr/m/n/10.95 983)\OML/cmm/m/it/10.95 ;  aircraft \OT1/cmr/m/n/10.95 :  
@@ -427,6 +437,7 @@ cmm/m/it/10.95 wikipedia:org=Airplane;  \OT1/cmr/m/n/10.95 0\OML/cmm/m/it/10.95
 /10.95 :\OT1/cmr/m/n/10.95 983)\OMS/cmsy/m/n/10.95 g
  []
 
+[10]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
@@ -435,61 +446,47 @@ Missing character: There is no ¡ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 302.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 298.
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--302
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 287--302
+Underfull \hbox (badness 10000) in paragraph at lines 287--298
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--302
+Underfull \hbox (badness 10000) in paragraph at lines 287--298
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--302
+Underfull \hbox (badness 10000) in paragraph at lines 287--298
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--302
+Underfull \hbox (badness 10000) in paragraph at lines 287--298
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--302
+Underfull \hbox (badness 10000) in paragraph at lines 287--298
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--302
-
- []
-
-
-Overfull \hbox (1.1361pt too wide) in paragraph at lines 287--302
+Overfull \hbox (1.1361pt too wide) in paragraph at lines 287--298
 \OT1/cmr/m/n/10.95 Wikipedia links. Proc. AAAI08 Work-shop on Wikipedia and Ar-
 ti-fi-cial In-tel-li-gence, Chicago,
  []
 
-
-Underfull \vbox (badness 4859) has occurred while \output is active []
-
- [10]
 [11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 302.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 298.
  (./OptimizedEntityLinking.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 302.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 302.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 298.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 298.
 Package rerunfilecheck Info: File `OptimizedEntityLinking.out' has not changed.
 
 (rerunfilecheck)             Checksum: B4E4E90EC909FF375ACB15595AF8EB26;1170.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 302.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 298.
  ) 
 Here is how much of TeX's memory you used:
  6737 strings out of 494501
@@ -512,7 +509,7 @@ ype1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015basic/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2015basic/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015basic/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on OptimizedEntityLinking.pdf (11 pages, 202452 bytes).
+Output written on OptimizedEntityLinking.pdf (11 pages, 202418 bytes).
 PDF statistics:
  251 PDF objects out of 1000 (max. 8388607)
  223 compressed objects within 3 object streams

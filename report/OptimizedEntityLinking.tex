@@ -79,7 +79,7 @@ to simply contain
 $$\mbox{{\sc Candidates}}(Apple) = \{Apple \ Inc.\}$$
 Which is the correct assignment for Apple in this context.
 \\ \\
-One of the problems we encounter above is the task of semantic-relatedness - that is, how can we quantify a keyword-link pairing as correct or incorrect and how can we use the corpus of the wikipedia pages corresponding to the other link assignments to make a current assignment better. However, It might not be the case that a particular future assignment has any dependence on the previous ones or the other entities around it. We will discuss possible ways of solving this problem by using our problem formulation while at the same time identifying the inherent limitations of capturing qualitative notions of relatedness through specific numerical assignments, both in this approach and in the greater field of natural language processing.
+One of the problems we encounter above is the task of semantic-relatedness - that is, how can we quantify a keyword-link pairing as correct or incorrect and how can we use the corpus of the wikipedia pages corresponding to the other link assignments to make a current assignment better. However, it might not be the case that a particular future assignment has any dependence on the previous ones or the other entities around it. We will discuss possible ways of solving this problem by using our problem formulation while at the same time identifying the inherent limitations of capturing qualitative notions of relatedness through specific numerical assignments, both in this approach and in the greater field of natural language processing.
 
 \section{Problem Formulation}
 
@@ -93,6 +93,7 @@ res(s, a) = s' & Transition Model & A new resulting dictionary after assigning o
 $s_0$             & Initial State    & A dictionary of keywords where the keys are the words and the values are all initially assigned independently to their highest relevance score candidate link.                                                                                                                                                                                                                                                                                                                                                                                    \\ \hline
 $\mbox{\sc Terminal}(s)$             & Terminal State    & We reach a terminal state after many steps of iteration until the variance between relevance scores of each assignment to the next for a keyword does not change greatly. This can simply be the the state we obtain after N iterations and N can be changed at runtime                                                                                                                                                                                                                                                                                                                                                                                    \\ \hline
 \end{tabular}
+\\ \\
 \\ \\
 Our algorithm first takes in a block of text and preprocesses it to obtain the keywords and build up our initial state of our search problem as a dictionary where the keys are the keywords and the values are their respective wikipedia page assignments which are initially set to be the highest relevance scoring candidate link for that word and its corresponding relevance score, such as $\{keyword: \ (link, \ score), \ ...\}$. Our initial input could be ``An airplane has a heavy wing'', and our preprocessed initial state will be a dictionary of the form $$\{airplane: \ (candidateLink_1, \ 0.7553), \ wing: \ (candidateLink_2,  \ 0.8483)\}$$
 which will be what our search formulation will begin with. The next step is using a variant of local search that can modify this complete and potentially inconsistent assignment into a complete assignment that can be highly accurate after many iterations. Now we describe how an initial state is obtained and how its context is then processed to improve every link assignment.
@@ -136,7 +137,7 @@ Where {\sc Similarity} is the cosine similarity between two vectors, which is ch
 $$\mbox{TF-IDF} = \sqrt{f(k, p)} \cdot \log \left( \frac{|\mathcal{D}|}{\{d \in \mathcal{D} \ | \ k \in \mathcal{D}\}} \right) $$
 Where $k$ is a current term, $p$ is its candidate link's wikipedia page content, $f(k,p)$ is the term frequency of $k$ in $p$, $|\mathcal{D}|$ is the total number of documents, and $\{d \in \mathcal{D} \ | \ k \in d\}$ is the number of documents that contain a current term, $k$ (Chisholm 149).
 
-The key to an effective relevance function will involve encoding terms with TF-IDF weights. There are variations of this approach that have been successful in literature, but one that stands out over others (Citation Needed. It is the algorithm comparison paper) in terms of time and space complexity is known as Explicit Semantic Analysis. Dojchinovski provides a summary of the method, which we will work into our formulation and modify to implement our final relevance function through the following high-level description:
+The key to an effective relevance function will involve encoding terms with TF-IDF weights. There are variations of this approach that have been successful in literature, but one that stands out over others (Yano 9) in terms of time and space complexity is known as Explicit Semantic Analysis. Dojchinovski provides a summary of the method, which we will work into our formulation and modify to implement our final relevance function through the following high-level description:
 
 \textit{A selected keyword is preprocessed and represented as a TF-IDF term vector. For each keyword $w_i \in \mbox{\sc Context}$, the method retrieves the possible Wikipedia articles from the Wikipedia API $c_1,... ,c_n$ containing $w_i$. The semantic relatedness of the word $w_i$ with candidate link $c_j$ is computed such that the similarity of association between $w_i$ and $c_j$ is multiplied with the TF-IDF weight of $w_i$. The relatedness score for any two documents is determined by computing the cosine similarity between the vectors of this candidate link and keyword semantic relatedness.} (Dojchinovski 3).
 
@@ -232,7 +233,7 @@ Currently, our formulation simply iterates for a set number of iterations to imp
 
 \section{Testing of Major System Features}
 
-Our system testing will rely on measuring the linking accuracy of our search optimizations. We define linking accuracy as the percentage of correctly linked entities in a given input text. We will begin with a testing set of sample raw text we have created along with a solution set corresponding to each of those texts with their entities correctly linked to what we know are their right wikipedia pages. We will run every text in this testing set on our system, and measure the number of correctly named entities per input when compared to the solution set with a different number of iterations.
+Our system testing will rely on measuring the linking accuracy of our search optimizations. We define linking accuracy as the percentage of correctly linked entities in a given input text. We will begin with a testing set of sample raw text we have created along with a solution set corresponding to each of those texts with their entities correctly linked to what we know are their right wikipedia pages. We will run every text in this testing set on our system, and measure the number of correctly named entities per input when compared to the solution set with a different number of iterations. All of our test sets are inside of the test/ folder in our project. Sample tests can be ran by running python test.py. 
 
 We will perform the same test, but by changing the parameter $\alpha$ in our convex combination of LinkRelevance and DocumentRelevance at a different range of values and analyze how the accuracy of our system changes based on an increase in choice of $\alpha$. We provide this testing set along with the solution set inside of the test subfolder within our github code, which can be run as explained within the appendix of this report.
 
@@ -283,18 +284,13 @@ $$\{airplanes: \ (wikipedia.org/Airplane, \ 0.983), \ aircraft: \ (wikipedia.org
 \section{Appendix III}
 Raul focused on developing the report for the project as well as formulating the problem in terms of concepts used in class. Melissa focused on the design and presentation of our project. Sameer focused on developing the code base as well as the algorithmic development of our project.
 \section{References}
-
+Yano, Kang. 2015. Taking advantage of Wikipedia in Natural Language Processing.
+\\ \\
 Chisholm, Hachey. 2015. Entity disambiguation with web links. Transactions of the Association for Computational Linguistics, 3:145–156.
 \\ \\
 Dojchinovski, Kliegr, Lašek, and Zamazal. ``Wikipedia search as effective entity linking algorithm''. In Text Analysis Conference (TAC) 2013 Proceedings. NIST, 2013.
 \\ \\
-Dredze, McNamee, Rao, Gerber, and Finin. 2010. Entity Disambiguation for Knowledge Base Population. Proc. NAACL2010.
-\\ \\
-Guo, Zhaochen, and Denilson Barbosa. ``Robust Entity Linking via Random Walks.'' Proceedings of the 23rd ACM International Conference on Conference on Information and Knowledge Management - CIKM '14.
-\\ \\
 Hachey, Ben, Will Radford, Joel Nothman, Matthew Honnibal, and James R. Curran. ``Evaluating Entity Linking with Wikipedia.'' Artificial Intelligence: 130-50.
-\\ \\
-Houlsby, Neil, and Massimiliano Ciaramita. ``A Scalable Gibbs Sampler for Probabilistic Entity Linking.'' Lecture Notes in Computer Science Advances in Information Retrieval: 335-46.
 \\ \\
 Luo, Gang, et al. ``Joint Named Entity Recognition and Disambiguation.''
 \\ \\
