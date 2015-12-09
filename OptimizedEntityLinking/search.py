@@ -41,9 +41,10 @@ class LocalSearch(object):
                         currentLinkDocumentRelevances.append(currentLinkScore)
 
                     # Obtain the LinkRelevances
-                    currentLinkRelevance = RelevanceModel.linkRelevance(self.keywords, assignedLink)
-                    candidateLinkRelevance = RelevanceModel.linkRelevance(self.keywords, candidateLink)
-
+                    assignedPage = self.retrieveCachedPage(assignedLink)
+                    candidatePage = self.retrieveCachedPage(candidateLink)
+                    currentLinkRelevance = RelevanceModel.linkRelevance(self.keywords, assignedPage)
+                    candidateLinkRelevance = RelevanceModel.linkRelevance(self.keywords, candidatePage)
                     # Obtain a convex combination of the link relevances and the
                     # sum of the document relevances
                     candidatePsi = (1 - alpha)*candidateLinkRelevance + alpha*sum(candidateDocumentRelevances)

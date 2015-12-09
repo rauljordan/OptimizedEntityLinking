@@ -25,15 +25,15 @@ class RelevanceModel(object):
     """
 
     @classmethod
-    def linkRelevance(self, inputKeywords, link):
+    def linkRelevance(self, inputKeywords, page):
         inputText = ' '.join(inputKeywords)
 
-        try:
-            linkText = wk.page(link, auto_suggest=False).content.lower()
-        except wk.exceptions.DisambiguationError as e:
-            options = filter(lambda x: "(disambiguation)" not in x, e.options)
-            linkText = wk.page(options[0], auto_suggest=False).content.lower()
-
+        # try:
+        #     linkText = wk.page(link, auto_suggest=False).content.lower()
+        # except wk.exceptions.DisambiguationError as e:
+        #     options = filter(lambda x: "(disambiguation)" not in x, e.options)
+        #     linkText = wk.page(options[0], auto_suggest=False).content.lower()
+        linkText = page
         vectorizer = TfidfVectorizer(tokenizer=normalize, stop_words='english')
         tfidf = vectorizer.fit_transform([inputText, linkText])
         return ((tfidf * tfidf.T).A)[0,1]
