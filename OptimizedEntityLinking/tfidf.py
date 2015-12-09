@@ -38,9 +38,15 @@ def cosine_sim(text1, text2):
     tfidf = vectorizer.fit_transform([text1, text2])
     return ((tfidf * tfidf.T).A)[0,1]
 
-import wikipedia as wk 
-inc = wk.page('Apple Inc.').content
-fruit = wk.page('Apple (Fruit)').content
-print cosine_sim('Steve Jobs was a great leader at Apple', inc)
-print cosine_sim('Steve Jobs was a great leader at Apple', fruit)
-print cosine_sim(inc, fruit)
+# import wikipedia as wk 
+# inc = wk.page('Apple Inc.').content
+# fruit = wk.page('Apple (Fruit)').content
+# print cosine_sim('Steve Jobs was a great leader at Apple', inc)
+# print cosine_sim('Steve Jobs was a great leader at Apple', fruit)
+# print cosine_sim(inc, fruit)
+
+
+
+
+
+

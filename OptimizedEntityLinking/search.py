@@ -6,9 +6,16 @@ import wikipedia as wk
 
 class LocalSearch(object):
     """Implements a local search algorithm"""
-    def __init__(self, keywords):
+    def __init__(self, keywords, cache):
         self.keywords = keywords
-        self.cachedPages = {}
+        # self.cachedPages = {"apple": [("Apple Inc.", "Is a major software..."), ("apple (fruit)", "round fruit with seeds...")], "cup": [("cup (drinking)", "something you use to drink...")] }
+        self.cachedPages = cache
+
+    def retrieveCachedPage(self, link):
+        for keyword in self.cachedPages.keys():
+            for pageTup in self.cachedPages[keyword]:
+                if pageTup[0] == link:
+                    return pageTup[1]
 
     def run(self):
         """ RUNS LOCAL SEARCH """
@@ -17,7 +24,9 @@ class LocalSearch(object):
 
 
         for keyword in self.keywords:
-            candidateLinks = wk.search(keyword)
+            candidateLinks = [k[0] for k in self.cachedPages[keyword]]
+            #candidateLinks = wk.search(keyword)
+
             context = [v for k, v in initialState.items() if k != keyword]
 
             # For that candidate link, compare its page
@@ -56,7 +65,8 @@ class LocalSearch(object):
         relevance score to the keyword's context and return the highest
         scoring link along with its relevance score"""
         relevances = []
-        for candidateLink in wk.search(keyword):
+        potentialLinks = [k[0] for k in self.cachedPages[keyword]]
+        for candidateLink in potentialLinks: #wk.search(keyword):
             score = RelevanceModel.linkRelevance(self.keywords, candidateLink)
             relevances.append((candidateLink, score))
 

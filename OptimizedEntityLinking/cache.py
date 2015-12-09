@@ -15,12 +15,16 @@ def getContentFromLink(link):
 
 def getCache(wordArray):
 	cache = {}
+	length = len(wordArray)
+	i = 0
 	for word in wordArray:
 		links = wk.search(word)
 		cache[word] = [(l, getContentFromLink(l)) for l in links]
+		i = i + 1
+		print str(i) + "/" + str(length) + " potential pages cached"
 	return cache
 
 
-a = getCache(["apple"])
+#a = getCache(["apple"])
 
-print len(a["apple"])
+#print len(a["apple"])

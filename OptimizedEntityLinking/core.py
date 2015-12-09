@@ -11,6 +11,7 @@ access to the different relevance function classes
 
 import search
 import nltk
+import cache
 
 
 class EntityLinker(object):
@@ -20,8 +21,10 @@ class EntityLinker(object):
     def link(self, words):
         print 'Preprocessing Input...'
         processedWords = self.preprocess(words)
+        print 'fetching cache...'
+        c = cache.getCache(processedWords)
         print 'Linking Input...'
-        searchAgent = search.LocalSearch(processedWords)
+        searchAgent = search.LocalSearch(processedWords, c)
         print searchAgent.getInitialState()
         #result = searchAgent.run()
         #print self.prettify(result)
@@ -54,4 +57,6 @@ class EntityLinker(object):
 
 if __name__ == '__main__':
     el = EntityLinker()
-    el.link('Thermodynamics is the study of heat and heat-transfer')
+    #el.link('Thermodynamics is the study of heat and heat-transfer')
+    el.link("The quick brown fox jumped over the lazy dog. Then the lazy brown dog took an adderall and crushed a paper.")
+
