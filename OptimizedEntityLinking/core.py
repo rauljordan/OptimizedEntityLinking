@@ -24,9 +24,9 @@ class EntityLinker(object):
     def link(self, words):
         print 'Preprocessing Input...'
         processedWords = self.preprocess(words)
-        print 'fetching cache...'
+        print 'Caching Possible Wikipedia Pages For Faster Runtime...'
         c = cache.getCache(processedWords)
-        print 'Linking Input...'
+        print 'Linking Initial Input...'
         searchAgent = LocalSearch(processedWords, c)
         result = searchAgent.runLocalSearch(self.alpha, self.iterations)
         print self.prettify(result)

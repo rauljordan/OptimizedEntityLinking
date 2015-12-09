@@ -20,16 +20,18 @@ class LocalSearch(object):
         state = self.getInitialState()
         print "Initial State Obtained!"
         print state
-        print "Running Local Search..."
+        print "Running Local Search for " + str(iterations) + " iterations..."
         for i in range(iterations):
             for keyword in self.keywords:
+                print
+                print "Analyzing the keyword " + keyword
                 candidateLinks = [k[0] for k in self.cachedPages[keyword]]
                 assignedLink = state[keyword][0]
 
                 for candidateLink in candidateLinks:
                     candidateDocumentRelevances = []
-                    currentAssignmentDocumentRelevances = []
-                    context = [v[0] for k, v in state if k != keyword]
+                    currentLinkDocumentRelevances = []
+                    context = [v[0] for k, v in state.items() if k != keyword]
                     for otherAssignedLink in context:
                         # Obtain the Document Relevances as a list
                         candidateScore = RelevanceModel.documentRelevance(candidateLink, otherAssignedLink)
@@ -40,23 +42,25 @@ class LocalSearch(object):
 
                     # Obtain the LinkRelevances
                     currentLinkRelevance = RelevanceModel.linkRelevance(self.keywords, assignedLink)
-                    candidateLinkRelevance = linkRelevance(self.keywords, candidateLink)
+                    candidateLinkRelevance = RelevanceModel.linkRelevance(self.keywords, candidateLink)
 
                     # Obtain a convex combination of the link relevances and the
                     # sum of the document relevances
                     candidatePsi = (1 - alpha)*candidateLinkRelevance + alpha*sum(candidateDocumentRelevances)
                     currentPsi = (1 - alpha)*currentLinkRelevance + alpha*sum(currentLinkDocumentRelevances)
-
+                    print
+                    print "Current Psi Value " + str(currentPsi) + " For " + assignedLink
+                    print "Candidate Link Psi Value " + str(candidatePsi) + " For " + candidateLink
 
                     # If the candidate link's convex combination is greater than the current
                     # link's convex combination, we replace that assignment
                     if candidatePsi > currentPsi:
                         state[keyword] = (candidateLink, candidateLinkRelevance)
                         print "Replaced Link"
-            print str(i) + "/" + str(iterations) + " iterations complete
+            print str(i + 1) + "/" + str(iterations) + " iterations complete"
 
 
-        return initialState
+        return state
 
     def getInitialState(self):
         """
