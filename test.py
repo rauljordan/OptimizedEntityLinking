@@ -1,10 +1,11 @@
 
+from __future__ import division
 from OptimizedEntityLinking.core import EntityLinker
 import json
 import ast
+import numpy as np
 
-
-alphas = [0, 0.25, 0.5, 0.99, 1]
+alphas = [0]
 
 with open('test/solutions.txt') as f:
     solutions = []
@@ -12,10 +13,23 @@ with open('test/solutions.txt') as f:
         solutions.append(ast.literal_eval(line))
 
 with open('test/testset.txt') as f:
-    accuracies = []
+    avg_accuracies = []
     for alpha in alphas:
         el = EntityLinker(alpha, 1)
-        for line in f.readlines():
+        accuracies = []
+        for i, line in enumerate(f.readlines()):
+
+            currentSolution = solutions[i]
             result = el.link(line)
 
-            
+            totalKeywords = len(result.keys())
+            correctKeywords = 0
+            for k in result:
+                if result[k][0] == currentSolution[k][0]:
+                    correctKeywords += 1
+
+            accuracies.append(correctKeywords / totalKeywords)
+
+        avg_accuracies.append(np.mean(accuracies))
+        
+print avg_accuracies
