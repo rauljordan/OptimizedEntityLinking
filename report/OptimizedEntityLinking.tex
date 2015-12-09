@@ -85,6 +85,15 @@ One of the problems we encounter above is the task of semantic-relatedness - tha
 
 We will begin by formulating our problem as we do in class
 \\ \\
+\begin{tabular}{|p{3cm}|p{3cm}|p{9cm}|}
+\hline
+S              & State Space      & The set of all possible dictionaries of word/link assignments created from our input words. The keys are the keywords, and the values are a tuple of an assigned link and its relevance score to the keyword. 0 means no relevance and a value close to 1 means highly relevant which is found through measures of Cosine Similarity and TF-IDF Weighting as discussed in the following section. \\ \hline
+A              & Action Space     & All possible wikipedia pages we could assign to a link. An action will involve assigning one wikipedia page to one link and finding its relevance score.                                                                                                                                                                                                                                                                                                                                                                                           \\ \hline
+res(s, a) = s' & Transition Model & A new resulting dictionary after assigning or changing a wikipedia page assignment to one word in our current dictionary                                                                                                                                                                                                                                                                                                                                                                                          \\ \hline
+$s_0$             & Initial State    & A dictionary of keywords where the keys are the words and the values are all initially assigned independently to their highest relevance score candidate link.                                                                                                                                                                                                                                                                                                                                                                                    \\ \hline
+$\mbox{\sc Terminal}(s)$             & Terminal State    & We reach a terminal state after many steps of iteration until the variance between relevance scores of each assignment to the next for a keyword does not change greatly. This can simply be the the state we obtain after N iterations and N can be changed at runtime                                                                                                                                                                                                                                                                                                                                                                                    \\ \hline
+\end{tabular}
+\\ \\
 Our algorithm first takes in a block of text and preprocesses it to obtain the keywords and build up our initial state of our search problem as a dictionary where the keys are the keywords and the values are their respective wikipedia page assignments which are initially set to be the highest relevance scoring candidate link for that word and its corresponding relevance score, such as $\{keyword: \ (link, \ score), \ ...\}$. Our initial input could be ``An airplane has a heavy wing'', and our preprocessed initial state will be a dictionary of the form $$\{airplane: \ (candidateLink_1, \ 0.7553), \ wing: \ (candidateLink_2,  \ 0.8483)\}$$
 which will be what our search formulation will begin with. The next step is using a variant of local search that can modify this complete and potentially inconsistent assignment into a complete assignment that can be highly accurate after many iterations. Now we describe how an initial state is obtained and how its context is then processed to improve every link assignment.
 
@@ -223,16 +232,23 @@ Currently, our formulation simply iterates for a set number of iterations to imp
 
 \section{Testing of Major System Features}
 
-Include a description of the testing data you used and a discussion of examples that illustrate major features of your system. Testing is a critical part of system construction, and the scope of your testing will be an important component in our evaluation.
 Our system testing will rely on measuring the linking accuracy of our search optimizations. We define linking accuracy as the percentage of correctly linked entities in a given input text. We will begin with a testing set of sample raw text we have created along with a solution set corresponding to each of those texts with their entities correctly linked to what we know are their right wikipedia pages. We will run every text in this testing set on our system, and measure the number of correctly named entities per input when compared to the solution set with a different number of iterations.
-We will perform the same test, but by changing the parameter $\alpha$ in our convex combination of {\sc LinkRelevance} and {\sc DocumentRelevance} at a different range of values and analyze how the accuracy of our system changes based on an increase in choice of $\alpha$. We present these results in section 8.
 
+We will perform the same test, but by changing the parameter $\alpha$ in our convex combination of LinkRelevance and DocumentRelevance at a different range of values and analyze how the accuracy of our system changes based on an increase in choice of $\alpha$. We provide this testing set along with the solution set inside of the test subfolder within our github code, which can be run as explained within the appendix of this report.
+
+We run our testing data for 1 iteration on 3 different choices of alpha. We will measure accuracy as the average accuracy for a given alpha by running the entire testing data set.
+\\ \\
+\begin{tabular}{cc}
+\hline
+\textbf{Alpha}            & \textbf{Average Accuracy Over All Test Data} \\ \hline
+\multicolumn{1}{|c|}{0}   & \multicolumn{1}{c|}{75\%}                    \\ \hline
+\multicolumn{1}{|c|}{0.5} & \multicolumn{1}{c|}{78\%}                    \\ \hline
+\multicolumn{1}{|c|}{1}   & \multicolumn{1}{c|}{40\%}                    \\ \hline
+\end{tabular}
 
 \section{Key Takeaways from Algorithmic Implementation}
 
 Our implementation has taught us that there is still a lot of work to be done in effective and fast entity linking systems. As an active area of research in NLP, even using the best python packages for the task, we still encountered many difficulties with achieving human-level effectiveness in this problem, and also discovered how difficult it is to create effective formalisms for systems dealing with language in this manner.
-
-\section{Empirical \& Graphical Results}
 
 \section{Appendix I}
 We can run our program for $\alpha = 0$ and for one iteration as follows on an input of related entities like
@@ -240,23 +256,47 @@ We can run our program for $\alpha = 0$ and for one iteration as follows on an i
 python core.py ``Thermodynamics is the study of heat'' \texttt{-{}-}iterations 1 \texttt{-{}-}alpha 0
 \\ \\
 we obtain
+\mbox{Thermodynamics: (en.wikipedia.org/wiki/Thermodynamics, 0.40149447781747305)}
+\\
+\mbox{Study: (en.wikipedia.org/wiki/Retrospective cohort study, 0.2515664918707764)}
+\\
+\mbox{Heat: (u'en.wikipedia.org/wiki/Waste heat, 0.36609699772214532)}
 \\ \\
-If we run the same example for 5 iterations and an alpha of 1 we obtain
+If we run the same example for 5 iterations and an alpha of 1 we obtain the same result
 \\ \\
-Now for an alpha value of 0.5 we obtain
+Now for an alpha value of 0.5
+\\
+we obtain
+\mbox{Thermodynamics: (en.wikipedia.org/wiki/Thermodynamics, 0.40149447781747305)}
+\\
+\mbox{Study: (en.wikipedia.org/wiki/Retrospective cohort study, 0.2515664918707764)}
+\\
+\mbox{Heat: (u'en.wikipedia.org/wiki/Heat, 0.7382838832833)}
 \section{Appendix II}
 To run our system, download the code in our Github Repository
- \url{https://github.com/rauljordan/OptimizedEntityLinking}
-and navigate to the OptimizedEntityLinking subfolder within it. From there, run python core.py with the following options
+ \url{https://github.com/rauljordan/OptimizedEntityLinking} Download all the python package requirements by using the command env/bin/pip install -r requirements.txt and navigate to the OptimizedEntityLinking subfolder within it. From there, run python core.py with the following options
 \\ \\
 python core.py ``Airplanes are aircraft'' \texttt{-{}-}iterations 10 \texttt{-{}-}alpha 0.1
 \\ \\
-Where the argument after core.py is the text you wish to provide, iterations is the number of iterations that our search will perform before returning a final state, and alpha is the convex combination parameter described in section 2.3 that can take values in the range 0 to 1. The default value of iterations is 1 and the default alpha is 0. The system will then print out to the console the different stages of the algorithms and their runtime, and will end by printing out a terminal state where all the keywords are linked to their corresponding wikipedia pages. A sample output of a terminal state is
+If any errors occur related to NLTK, make sure you go to a python shell and write import nltk and then nltk.download() to download the necessary NLTK packages (tokenizers and stemmers packages). In the input above, the argument after core.py is the text you wish to provide, iterations is the number of iterations that our search will perform before returning a final state, and alpha is the convex combination parameter described in section 2.3 that can take values in the range 0 to 1. The default value of iterations is 1 and the default alpha is 0. The system will then print out to the console the different stages of the algorithms and their runtime, and will end by printing out a terminal state where all the keywords are linked to their corresponding wikipedia pages. A sample output of a terminal state is
 $$\{airplanes: \ (wikipedia.org/Airplane, \ 0.983), \ aircraft: \ (wikipedia.org/Aircraft, \ 0.983)\}$$
 \section{Appendix III}
 Raul focused on developing the report for the project as well as formulating the problem in terms of concepts used in class. Melissa focused on the design and presentation of our project. Sameer focused on developing the code base as well as the algorithmic development of our project.
-\vskip 0.2in
-\bibliography{sample}
-\bibliographystyle{theapa}
+\section{References}
 
+Chisholm, Hachey. 2015. Entity disambiguation with web links. Transactions of the Association for Computational Linguistics, 3:145–156.
+\\ \\
+Dojchinovski, Kliegr, Lašek, and Zamazal. ``Wikipedia search as effective entity linking algorithm''. In Text Analysis Conference (TAC) 2013 Proceedings. NIST, 2013.
+\\ \\
+Dredze, McNamee, Rao, Gerber, and Finin. 2010. Entity Disambiguation for Knowledge Base Population. Proc. NAACL2010.
+\\ \\
+Guo, Zhaochen, and Denilson Barbosa. ``Robust Entity Linking via Random Walks.'' Proceedings of the 23rd ACM International Conference on Conference on Information and Knowledge Management - CIKM '14.
+\\ \\
+Hachey, Ben, Will Radford, Joel Nothman, Matthew Honnibal, and James R. Curran. ``Evaluating Entity Linking with Wikipedia.'' Artificial Intelligence: 130-50.
+\\ \\
+Houlsby, Neil, and Massimiliano Ciaramita. ``A Scalable Gibbs Sampler for Probabilistic Entity Linking.'' Lecture Notes in Computer Science Advances in Information Retrieval: 335-46.
+\\ \\
+Luo, Gang, et al. ``Joint Named Entity Recognition and Disambiguation.''
+\\ \\
+Milne and Witten. An effective, low-cost measure of semantic relatedness obtained from Wikipedia links. Proc. AAAI’08 Workshop on Wikipedia and Artificial Intelligence, Chicago, IL.
 \end{document}

@@ -1,0 +1,3 @@
+"Thermodynamics is the study of heat"
+"Airplane! was a fantastic movie"
+"China is a country with a great GDP"
