@@ -23,8 +23,3 @@ def getCache(wordArray):
 		i = i + 1
 		print str(i) + "/" + str(length) + " potential pages cached"
 	return cache
-
-
-#a = getCache(["apple"])
-
-#print len(a["apple"])

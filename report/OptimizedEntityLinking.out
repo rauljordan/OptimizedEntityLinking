@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{A New Abstraction Based on Existing Methods}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Range of Problems Addressed}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Problem Formulation}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{High Level Description: Obtaining an Initial State}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.2}{The Relevance Function}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.3}{High Level Description: Using Context to Improve Link Assignments}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{Algorithmic Optimizations}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{Smallest Candidate Link Space Heuristic}{section.3}% 9
+\BOOKMARK [1][-]{section.4}{Algorithmic Analysis \046 Evaluation}{}% 10
+\BOOKMARK [1][-]{section.5}{Algorithmic Limitations}{}% 11
+\BOOKMARK [1][-]{section.6}{Testing of Major System Features}{}% 12
+\BOOKMARK [1][-]{section.7}{Key Takeaways from Algorithmic Implementation}{}% 13
+\BOOKMARK [1][-]{section.8}{Empirical \046 Graphical Results}{}% 14
+\BOOKMARK [1][-]{section.9}{Appendix I}{}% 15
+\BOOKMARK [1][-]{section.10}{Appendix II}{}% 16
+\BOOKMARK [1][-]{section.11}{Appendix III}{}% 17

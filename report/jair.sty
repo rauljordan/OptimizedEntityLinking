@@ -12,7 +12,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                             P A G E   S I Z E
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 % Change the overall width of the page.  If these parameters are
 %	changed, they will require corresponding changes in the
 %	maketitle section.
@@ -72,10 +72,10 @@
      \@xsect{#5}}
 
 \def\@sect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
-     \def\@svsec{}\else 
+     \def\@svsec{}\else
      \refstepcounter{#1}\edef\@svsec{\csname the#1\endcsname\hskip 0.5em }\fi
      \@tempskipa #5\relax
-      \ifdim \@tempskipa>\z@ 
+      \ifdim \@tempskipa>\z@
         \begingroup #6\relax
           \@hangfrom{\hskip #3\relax\@svsec}{\interlinepenalty \@M #8\par}
         \endgroup
@@ -112,7 +112,7 @@
 %
 % \renewcommand{\footnoterule}{\vspace{10pt}\hrule width 0mm}
 
-\long\def\@makefntext#1{\@setpar{\@@par\@tempdima \hsize 
+\long\def\@makefntext#1{\@setpar{\@@par\@tempdima \hsize
              \advance\@tempdima-15pt\parshape \@ne 15pt \@tempdima}\par
              \parindent 2em\noindent \hbox to \z@{\hss{\@thefnmark}. \hfil}#1}
 
@@ -181,41 +181,41 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                        H E A D S   A N D   F O O T S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 
+%%
 %% \def\@oddfoot{}
 %% \def\@evenfoot{}
-%% 
+%%
 %% \def\evenfoot#1{\def\@evenfoot{{\small \thepage} \hfil
 %%                                   {\small\sc #1}}}
-%% \def\oddfoot#1{\def\@oddfoot{{\small\sc #1} \hfil 
+%% \def\oddfoot#1{\def\@oddfoot{{\small\sc #1} \hfil
 %%                                         {\small \thepage}}}
 %% \def\firstfoot#1#2{%
 %% \def\@oddfoot{\scriptsize\vbox{\leftline{#1}\leftline{#2}}}}
-%% 
-%% 
+%%
+%%
 %% %% Usage: \jairfoot{}{published}{published}, e.g.
 %% %%        \jairfoot{}{Submitted 8/93;}{published 9/93}
-%% 
+%%
 %% \def\jairfoot{\firstfoot{%
 %%      \copyright 1993 AI Access Foundation. All rights reserved.}{}}
-%% 
+%%
 %% \def\nofoot{\def\@oddfoot{}}
-%% 
+%%
 %% \def\firstheading#1#2{%
 %%     \def\@oddhead{\scriptsize\vbox{\leftline{#1}\leftline{#2}}}
 %% }
 %% \def\evenheading#1{\def\@evenhead{{\small \thepage} \hfil
 %%                                   {\small\sc #1}}}
-%% \def\oddheading#1{\def\@oddhead{{\small\sc #1}} \hfil 
+%% \def\oddheading#1{\def\@oddhead{{\small\sc #1}} \hfil
 %%                                         {\small \thepage}}}
-%% 
+%%
 %% %% Usage: \jairheading{Volume}{year}{page-page}, e.g.
 %% %%        \jairheading{1}{1993}{1--15}
 %% %\addtolength{\headsep}{0.125in}
 %% \def\jairheading#1#2#3#4#5{\firstheading{%
 %%      Journal of Artificial Intelligence Research #1 (#2) #3 \hfil Submitted #4 published #5}{}}
-%%      
-%% 
+%%
+%%
 %% \def\ShortTitle#1{\oddheading{#1}}
 %% \def\ShortAuthor#1{\evenheading{#1}}
 
@@ -229,9 +229,9 @@
 
 %% \def\ps@jairtps{\let\@mkboth\@gobbletwo\def\@oddhead{\scriptsize Journal ofArtificial Intelligence Research 1 (1993) 1-15 \hfill Submitted 8/93 Published 9/93}%
 %% \def\@oddfoot{\scriptsize \copyright 1993 AI Access Foundation.  All rights reserved \hfill}\def\@evenhead{}\def\@evenfoot{}}
-%% 
+%%
 %% %% Defines the pagestyle jairps, the pagestyle of the remaining pages
-%% 
+%%
 %% \def\ps@jairps{\let\@mkboth\@gobbletwo\def\@oddhead{{\small\sc Minimizing Conflicts} \hfill {\small \thepage}}%
 %% \def\@oddfoot{}%
 %% \def\@evenhead{{\small \thepage} \hfill {\small Minton et al.}}%
@@ -242,8 +242,8 @@
 %%	  \jairheading{vol}{year}{pages}{Submitted}{published}
 
 \def\jairheading#1#2#3#4#5{\def\ps@jairtps{\let\@mkboth\@gobbletwo%
-\def\@oddhead{\scriptsize Journal of Artificial Intelligence Research #1 (#2) #3 \hfill Submitted #4; published #5}%
-\def\@oddfoot{\scriptsize \copyright #2 AI Access Foundation.  All rights reserved. \hfill}%
+\def\@oddhead{\scriptsize Computer Science 182: Artificial Intelligence #1 (#2) #3 \hfill Submitted #4; published #5}%
+\def\@oddfoot{\scriptsize \copyright #2 All rights reserved. \hfill}%
 \def\@evenhead{}\def\@evenfoot{}}%
 \thispagestyle{jairtps}}
 
@@ -287,7 +287,7 @@
 %  Allow ``hanging indents'' in long captions
 %
 \long\def\@makecaption#1#2{
-   \vskip 10pt 
+   \vskip 10pt
    \setbox\@tempboxa\hbox{#1: #2}
    \ifdim \wd\@tempboxa >\hsize               % IF longer than one line:
        \begin{list}{#1:}{
@@ -296,7 +296,7 @@
        \addtolength{\leftmargin}{\labelsep}
         }\item #2 \end{list}\par   % Output in quote mode
      \else                                    %   ELSE  center.
-       \hbox to\hsize{\hfil\box\@tempboxa\hfil}  
+       \hbox to\hsize{\hfil\box\@tempboxa\hfil}
    \fi}
 
 
@@ -324,5 +324,3 @@
              {\large\bf\raggedright}}%
 {\@startsiction{section}{1}{\z@}{-0.24in}{0.10in}
              {\large\bf\raggedright Appendix\ }}}}
-
-

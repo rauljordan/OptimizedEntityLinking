@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.11)  3 DEC 2015 14:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.11)  9 DEC 2015 12:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -96,28 +96,143 @@ Package: multicol 2015/03/31 v1.8m multicolumn formatting (FMi)
 \colbreak@box=\box51
 \mc@col@check@num=\count95
 )
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/listings.sty
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/graphics/keyval.sty
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.s
+ty
+Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/hobsub-generic.st
+y
+Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
+Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2012/05/28 v1.2 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+) (/usr/local/texlive/2015basic/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-\lst@mode=\count96
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+)
+\@linkdim=\dimen112
+\Hy@linkcounter=\count96
+\Hy@pagecounter=\count97
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count98
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Hyper figures OFF on input line 4443.
+Package hyperref Info: Link nesting OFF on input line 4448.
+Package hyperref Info: Hyper index ON on input line 4451.
+Package hyperref Info: Plain pages OFF on input line 4458.
+Package hyperref Info: Backreferencing OFF on input line 4463.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4688.
+\c@Hy@tempcnt=\count99
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5041.
+\XeTeXLinkMargin=\dimen113
+\Fld@menulength=\count100
+\Field@Width=\dimen114
+\Fld@charsize=\dimen115
+Package hyperref Info: Hyper figures OFF on input line 6295.
+Package hyperref Info: Link nesting OFF on input line 6300.
+Package hyperref Info: Hyper index ON on input line 6303.
+Package hyperref Info: backreferencing OFF on input line 6310.
+Package hyperref Info: Link coloring OFF on input line 6315.
+Package hyperref Info: Link coloring with OCG OFF on input line 6320.
+Package hyperref Info: PDF/A mode OFF on input line 6325.
+LaTeX Info: Redefining \ref on input line 6365.
+LaTeX Info: Redefining \pageref on input line 6369.
+\Hy@abspage=\count101
+\c@Item=\count102
+\c@Hfootnote=\count103
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
+\Fld@listcount=\count104
+\c@bookmark@seq@number=\count105
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip51
+) (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count106
 \lst@gtempboxa=\box52
 \lst@token=\toks15
-\lst@length=\count97
-\lst@currlwidth=\dimen112
-\lst@column=\count98
-\lst@pos=\count99
-\lst@lostspace=\dimen113
-\lst@width=\dimen114
-\lst@newlines=\count100
-\lst@lineno=\count101
-\lst@maxwidth=\dimen115
+\lst@length=\count107
+\lst@currlwidth=\dimen116
+\lst@column=\count108
+\lst@pos=\count109
+\lst@lostspace=\dimen117
+\lst@width=\dimen118
+\lst@newlines=\count110
+\lst@lineno=\count111
+\lst@maxwidth=\dimen119
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
-\c@lstnumber=\count102
-\lst@skipnumbers=\count103
+\c@lstnumber=\count112
+\lst@skipnumbers=\count113
 \lst@framebox=\box53
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/listings.cfg
@@ -135,14 +250,7 @@ Package color Info: Driver file: pdftex.def on input line 142.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
-(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-)
-(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count104
+\Gread@gobject=\count114
 ))
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/09/06 1.5e listings language file
@@ -162,118 +270,175 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
 LaTeX Font Info:    ... okay on input line 34.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
 LaTeX Font Info:    ... okay on input line 34.
-\c@lstlisting=\count105
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+\AtBeginShipoutBox=\box54
+Package hyperref Info: Link coloring OFF on input line 34.
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/generic/oberdiek/gettitlestring.st
+y
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count115
+)
+LaTeX Info: Redefining \ref on input line 34.
+LaTeX Info: Redefining \pageref on input line 34.
+LaTeX Info: Redefining \nameref on input line 34.
+ (./OptimizedEntityLinking.out) (./OptimizedEntityLinking.out)
+\@outlinefile=\write3
+\openout3 = `OptimizedEntityLinking.out'.
+
+\c@lstlisting=\count116
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count106
-\scratchdimen=\dimen116
-\scratchbox=\box54
-\nofMPsegments=\count107
-\nofMParguments=\count108
+\scratchcounter=\count117
+\scratchdimen=\dimen120
+\scratchbox=\box55
+\nofMPsegments=\count118
+\nofMParguments=\count119
 \everyMPshowfont=\toks16
-\MPscratchCnt=\count109
-\MPscratchDim=\dimen117
-\MPnumerator=\count110
-\makeMPintoPDFobject=\count111
+\MPscratchCnt=\count120
+\MPscratchDim=\dimen121
+\MPnumerator=\count121
+\makeMPintoPDFobject=\count122
 \everyMPtoPDFconversion=\toks17
 )
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ú in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ú in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 68.
-
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/omscmr.fd
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 64.
+ (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 68.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 64.
  [1{/usr/local/texlive/2015basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 74.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 74.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 74.
- [2]
-Underfull \hbox (badness 10000) in paragraph at lines 91--94
+Underfull \hbox (badness 10000) in paragraph at lines 74--77
 
  []
 
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ú in font cmr10!
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ù in font cmr10!
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 77.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 77.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 77.
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--83
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 86--88
+
+ []
+
 [3]
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ô in font cmr10!
- [4]
-Underfull \hbox (badness 10000) in paragraph at lines 137--140
+Underfull \hbox (badness 10000) in paragraph at lines 110--113
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 140--148
+Underfull \hbox (badness 10000) in paragraph at lines 114--118
 
  []
 
-[5]
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ô in font cmr10!
+[4] [5]
+Overfull \hbox (17.87518pt too wide) in paragraph at lines 158--159
+[][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (17.87518pt too wide) in paragraph at lines 159--161
+[][][][][][][][][][][][][] 
+ []
+
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6]
-Missing character: There is no ‚ in font cmr10!
-Missing character: There is no Ä in font cmr10!
-Missing character: There is no ô in font cmr10!
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7]
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 238--247
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 238--247
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 238--247
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 238--247
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 248--255
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 248--255
+
+ []
+
+[9]
+Overfull \hbox (7.23181pt too wide) detected at line 255
+\OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 airplanes \OT1/cmr/m/n/10.95 :  (\OML/
+cmm/m/it/10.95 wikipedia:org=Airplane;  \OT1/cmr/m/n/10.95 0\OML/cmm/m/it/10.95
+ :\OT1/cmr/m/n/10.95 983)\OML/cmm/m/it/10.95 ;  aircraft \OT1/cmr/m/n/10.95 :  
+(\OML/cmm/m/it/10.95 wikipedia:org=Aircraft;  \OT1/cmr/m/n/10.95 0\OML/cmm/m/it
+/10.95 :\OT1/cmr/m/n/10.95 983)\OMS/cmsy/m/n/10.95 g
+ []
 
 No file OptimizedEntityLinking.bbl.
-[7] (./OptimizedEntityLinking.aux) ) 
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 262.
+[10]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 262.
+ (./OptimizedEntityLinking.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 262.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 262.
+Package rerunfilecheck Info: File `OptimizedEntityLinking.out' has not changed.
+
+(rerunfilecheck)             Checksum: 1C61506BBC0AD577C86B1EEFF1508BDB;1192.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 262.
+ ) 
 Here is how much of TeX's memory you used:
- 2811 strings out of 494501
- 38581 string characters out of 6167030
- 151057 words of memory out of 5000000
- 6080 multiletter control sequences out of 15000+600000
+ 6737 strings out of 494501
+ 98736 string characters out of 6167030
+ 237611 words of memory out of 5000000
+ 9881 multiletter control sequences out of 15000+600000
  19589 words of font info for 74 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 26i,9n,40p,1367b,1677s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015basic/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015basic/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015basic/texmf
--dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2015basic/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015ba
-sic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/20
-15basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive
-/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
-ive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/te
-xlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loca
-l/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/l
-ocal/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></u
-sr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
->
-Output written on OptimizedEntityLinking.pdf (7 pages, 187050 bytes).
+ 29i,9n,40p,1679b,1090s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx1
+0.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbx12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmcsc10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmex10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015basic/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2015basic/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015basic/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on OptimizedEntityLinking.pdf (10 pages, 198035 bytes).
 PDF statistics:
- 76 PDF objects out of 1000 (max. 8388607)
- 54 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 247 PDF objects out of 1000 (max. 8388607)
+ 220 compressed objects within 3 object streams
+ 85 named destinations out of 1000 (max. 500000)
+ 137 words of extra memory for PDF output out of 10000 (max. 10000000)
 

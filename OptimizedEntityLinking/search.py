@@ -8,7 +8,6 @@ class LocalSearch(object):
     """Implements a local search algorithm"""
     def __init__(self, keywords, cache):
         self.keywords = keywords
-        # self.cachedPages = {"apple": [("Apple Inc.", "Is a major software..."), ("apple (fruit)", "round fruit with seeds...")], "cup": [("cup (drinking)", "something you use to drink...")] }
         self.cachedPages = cache
 
     def retrieveCachedPage(self, link):
@@ -17,33 +16,44 @@ class LocalSearch(object):
                 if pageTup[0] == link:
                     return pageTup[1]
 
-    def run(self):
-        """ RUNS LOCAL SEARCH """
-        documentRelevanceScores = []
-        initialState = self.getInitialState()
+    def runLocalSearch(self, alpha, iterations):
+        state = self.getInitialState()
+        print "Initial State Obtained!"
+        print state
+        print "Running Local Search..."
+        for i in range(iterations):
+            for keyword in self.keywords:
+                candidateLinks = [k[0] for k in self.cachedPages[keyword]]
+                assignedLink = state[keyword][0]
+
+                for candidateLink in candidateLinks:
+                    candidateDocumentRelevances = []
+                    currentAssignmentDocumentRelevances = []
+                    context = [v[0] for k, v in state if k != keyword]
+                    for otherAssignedLink in context:
+                        # Obtain the Document Relevances as a list
+                        candidateScore = RelevanceModel.documentRelevance(candidateLink, otherAssignedLink)
+                        candidateDocumentRelevances.append(candidateScore)
+
+                        currentLinkScore = RelevanceModel.documentRelevance(candidateLink, assignedLink)
+                        currentLinkDocumentRelevances.append(currentLinkScore)
+
+                    # Obtain the LinkRelevances
+                    currentLinkRelevance = RelevanceModel.linkRelevance(self.keywords, assignedLink)
+                    candidateLinkRelevance = linkRelevance(self.keywords, candidateLink)
+
+                    # Obtain a convex combination of the link relevances and the
+                    # sum of the document relevances
+                    candidatePsi = (1 - alpha)*candidateLinkRelevance + alpha*sum(candidateDocumentRelevances)
+                    currentPsi = (1 - alpha)*currentLinkRelevance + alpha*sum(currentLinkDocumentRelevances)
 
 
-        for keyword in self.keywords:
-            candidateLinks = [k[0] for k in self.cachedPages[keyword]]
-            #candidateLinks = wk.search(keyword)
-
-            context = [v for k, v in initialState.items() if k != keyword]
-
-            # For that candidate link, compare its page
-            # to all the other assigned pages, and keep track of their
-            # relevance scores inside of a relevance score
-            for candidateLink in candidateLinks:
-                for contextLink in context:
-                    documentRelevance = RelevanceModel.documentRelevance(candidateLink, contextLink)
-                    documentRelevanceScores.append((candidateLink, documentRelevance))
-
-            bestCandidateLink, bestPsiScore  = max(psiScores, key=lambda x: x[1])
-
-            relevanceOfBestCandidateLink = 0.99
-            if relevanceOfBestCandidateLink > initialState[keyword][1]:
-                # Replace!
-                initialState[keyword] = (bestCandidateLink, relevanceOfBestCandidateLink)
-
+                    # If the candidate link's convex combination is greater than the current
+                    # link's convex combination, we replace that assignment
+                    if candidatePsi > currentPsi:
+                        state[keyword] = (candidateLink, candidateLinkRelevance)
+                        print "Replaced Link"
+            print str(i) + "/" + str(iterations) + " iterations complete
 
 
         return initialState
@@ -65,8 +75,8 @@ class LocalSearch(object):
         relevance score to the keyword's context and return the highest
         scoring link along with its relevance score"""
         relevances = []
-        potentialLinks = [k[0] for k in self.cachedPages[keyword]]
-        for candidateLink in potentialLinks: #wk.search(keyword):
+        candidateLinks = [k[0] for k in self.cachedPages[keyword]]
+        for candidateLink in candidateLinks:
             score = RelevanceModel.linkRelevance(self.keywords, candidateLink)
             relevances.append((candidateLink, score))
 

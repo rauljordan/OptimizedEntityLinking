@@ -1,7 +1,7 @@
 \documentclass[twoside,11pt]{article}
-\usepackage{jair, theapa, rawfonts, multicol}
+\usepackage{jair, theapa, rawfonts, multicol, hyperref}
 
-\jairheading{1}{2015}{1-15}{10/15}{IN PROGRESS}
+\jairheading{1}{2015}{1-15}{12/10}{IN PROGRESS}
 \ShortHeadings{Classical Search Optimizations in Entity-Linking Systems}
 {Jordan, Lee, \& Mehra}
 \firstpageno{1}
@@ -33,7 +33,7 @@
 
 \begin{document}
 
-\title{Classical Search Optimizations for Entity-Linking Systems}
+\title{Search Optimizations for Entity-Linking Systems}
 
 \author{\name Raul E. Jordan \email rauljordan@college.harvard.edu \\
        \addr A.B. Candidate in Computer Science. \\ Harvard University.
@@ -52,145 +52,209 @@
 
 
 \begin{abstract}
-This paper describes a search-based approach to linking keyword entities in text to their corresponding wikipedia entries through optimizations of semantic-relatedness and a novel abstraction using existing methods. We will solve this problem for a given input through the optimization of certain parameters and the confidence value of a keyword-link pair, which we will refer to as a ``relevance score'', using methods such as Explicit Semantic Analysis and a Vector Space Model. Most of this project will explore different methods of defining this relevance function and its results. We present an approach that has wide applicability to understanding natural language and making it easier for computer agents to discover what a user is referring to with high confidence based on a structures knowledge base.
+This paper describes a search-based approach to linking keyword entities in text to their corresponding wikipedia entries through optimizations of semantic-relatedness and a novel abstraction using existing methods. We will solve this problem for a given input through the optimization of certain parameters and the confidence value of a keyword-link pair, which we will refer to as a ``relevance score'', using methods such as Explicit Semantic Analysis and a Vector Space Model. Most of this project will explore different methods of defining this relevance function and its results. We present an approach that has wide applicability to understanding natural language and making it easier for computer agents to discover what a user is referring to with high confidence based on a structured knowledge base.
 \end{abstract}
 
 
 \section{Introduction}
 
-Named-Entity Linking is a \textit{explain}. This is a complex task that has yielded powerful results in recent years, and the strength of using a structured corpora of Wikipedia has given rise to a wide-variety of techniques in the fields of machine learning and artificial intelligence as part of the greater scope of natural language processing that seeks to identify entities effectively. On a narrower panorama, the task of entity linking based on wikipedia is a task we describe as assigning the most-related. This paper will focus on defining a robust measure of relatedness to achieve a classical search-based, artificial intelligence solution to the task of named-entity recognition  to accomplishing effective entity linking by optimizing various methods of quantifying this “most-related” method. Being able to use a structured KB as a way of quickly identifying entities from context has a myriad of applications ranging from speech recognition, to intelligent personal assistants, which is especially relevant to recent systems such as Facebook`s ``M''.
+Named-entity recognition is a complex task that has yielded powerful results in recent years, and the strength of using a structured corpora of Wikipedia has given rise to a wide-variety of techniques in the fields of machine learning and artificial intelligence as part of the greater scope of natural language processing that seeks to identify entities effectively. At a broad level, this means being able to identify entities, also known as ``keywords'', within a corpus and identify them based on some prior structured knowledge. On a narrower panorama, the task of entity linking based on wikipedia is a task we will tackle by creating a system that is able to process a passage of text and assign to each keyword its corresponding wikipedia link. While it may be easy for humans to do this by identifying the entire context of a corpus and being able to gauge what the best link could be for an entity, computer systems need a way of quantifying how the relatedness of a potential link could change given the other keywords in the text.
 
-We will follow measures of semantic relatedness known from recent natural language processing research as ways of obtaining robust measures that determining whether or not an entity and link assignment is accurate enough.
+In particular, if the input text is \textit{Lindsay was a fantastic actress}, we want to link \textit{Lindsay to Lindsay Lohan} knowing that the keyword \textit{actress} is in the same context rather than \textit{John Lindsay of Balcarres}, a secretary of state of Scotland. We need an abstraction that is able to effectively capture this notion of context and how ``good'' of a fit a particular link could be to a keyword. This paper will focus on defining a robust measure of link-relatedness, which we will refer to as ``relevance'', as an abstraction to achieve a search-based solution to the task of named-entity recognition. Being able to use a structured knowledge base as a way of quickly identifying entities from context has a myriad of applications ranging from speech recognition to intelligent personal assistants, which are especially relevant to recent systems such as Facebook`s ``M'' that rely heavily on natural language processing and context to detect what a user truly wishes to communicate.
 
 \subsection{A New Abstraction Based on Existing Methods}
 
-Our new approach formulates named-entity linking (NEL) as a search problem by assigning each keyword a wikipedia link and taking into account previous link assignments to effectively and accurately determine the following ones through a method known as a “relevance function”. This is an abstraction that relies on existing algorithms, such as TF-IDF and Explicit Semantic Analysis (ESA) (Hachey 40) to determine if a link is the most likely candidate for a given keyword based on the set of all possible candidate links that word can take, as well as all the other keyword-link assignments around it. This function will map a keyword-link pairing to a score between 0 and 1 known as a \textit{relevance score} based on the existing \textit{semantic relatedness} algorithms such as ESA. Our formulation abstracts most of the problem-specific details of NEL by first assigning each keyword in a corpus a wikipedia link individually with a high confidence, and then using a variant of local search to iterate over each assignment and use the assignments around it to potentially modify its current link into a potentially better one. The key to our formulation is that every assignment of a keyword to a candidate link is crucial to improve the accuracy of the following assignments on each iteration of our system until we reach a satisfying state where the relevance scores of every assignment do not vary as much as before. Much of our discussion focuses on the problem of assessing an effective relevance function mapping and taking into account previous link-keyword assignments to achieve a terminal state of our formulation.
+
+Our new approach formulates named-entity linking (NEL) as a search problem by assigning each keyword a wikipedia link and taking into account previous link assignments to effectively and accurately determine the following ones through a method known as a ``relevance function''. This is an abstraction that relies on existing algorithms, such as TF-IDF and Explicit Semantic Analysis (ESA) (Hachey 40) to determine if a link is the most likely candidate for a given keyword based on the set of all possible candidate links that word can take, as well as all the other keyword-link assignments around it. This function will map a keyword-link pairing to a score between 0 and 1 known as a \textit{relevance score} based on the existing \textit{semantic relatedness} algorithms such as ESA. Our formulation abstracts most of the problem-specific details of NEL by first assigning each keyword in a corpus a wikipedia link individually with a high confidence, and then using a variant of local search to iterate over each assignment and use the assignments around it to potentially modify its current link into a potentially better one. The key to our formulation is that every assignment of a keyword to a candidate link is crucial to improve the accuracy of the following assignments on each iteration of our system until we reach a satisfying state where the relevance scores of every assignment do not vary as much as before. Much of our discussion focuses on the problem of assessing an effective relevance function mapping and taking into account previous link-keyword assignments to achieve a terminal state of our formulation.
+
+
 
 \subsection{Range of Problems Addressed}
 
-As a search problem, every state and action pair in a given search path will be important to the next state and action pair we determine. As previously mentioned, our solution will require that each previous link-keyword assignment provide crucial information for future assignments. One of the problems we encounter is how to determine the relevance between assignments as we traverse the state space of possible links a keyword can be paired to. In many cases, keywords in an input are highly related and one keyword can be immediately helpful in constraining the possible candidate state space of another keword in the input. For example,
-
-This is what we refer to as \textit{linking-dependence}. However, it might not be the case that a particular future assignment has any dependence on the previous ones or the other entities around it. For example, assume that our input is ``Steve Jobs was fantastic at Apple'' and that we have successfully linked ``Steve Jobs'' to his wikipedia page with a high confidence (relevance score) value. Suppose now that we are assigning ``Apple'' to its relevant link and that its candidate link state space contains.
-$$\mbox{{\sc Candidates}}(Apple) = \{Apple (Fruit), \ Apple Inc., ...\}$$
-However, taking into account that we have just assigned ``Steve Jobs'' before will restrict {\sc Candidates}(Apple) to
-$$\mbox{{\sc Candidates}}(Apple) = \{Apple \ Inc.\}$$
-We will refer to this as linking-dependence. We need to talk more about the specific problems that arise with determining the most-constrained keyword effectively
-
-\section{Classical Search Formulation}
-Our system first takes in a block of text and preprocesses it to obtain the keywords and build up our initial state of our search problem as a dictionary where the keys are the keywords and the values are their respective wikipedia page assignments which are initially set to (None, 0) where the the second element of this tuple is a ``relevance score'' for each particular link-keyword pair.
-
-For example, our initial input could be ``An airplane has a heavy wing'', and our preprocessed initial state will end up being a dictionary of the form $$\{\mbox{airplane}: \ (None, \ 0), \  \mbox{wing}: \ (None, \ 0)\}$$
-
-This input is then passed into a search agent that uses optimal and suboptimal algorithms such as Breadth First Search, Depth First Search, Uniform Cost Search, and $A^*$ Search with problem specific heuristics. Each action will involved choosing a keyword to assign and expanding the state space of candidate links the keyword can take on by taking into account previous keyword-link assignments. The solution returns a terminal state that has every word assigned a link with a relevance score above a certain threshold, $\gamma$ based on the relevance function, such as
-$$\{\mbox{airplane}: \ (wikipedia.org/Airplane, \ 0.98), \  \mbox{wing}: \ (wikipedia.org/Wing, \ 0.87)\}$$
-
-There are additional considerations in our search formulation we have to take into account when formulating our state space this way. We will discuss these by going into detail of how a specific Algorithm such as Depth First Search in our system finds a highly relevant terminal state in the following section.
-
-\subsection{High Level Example: Depth First Search}
-
-We implement the Depth First Search algorithm specified in AIMA (citation needed) but with key differences in the how each node is expanded into all of its possible child nodes. Also, choosing a keyword to assign will be the key of a deterministic, classical search formulation and we will do so by taking into account previous keyword-link assignments. We will accomplish this through a method defined as the \textit{most-constrained keyword heuristic}. The main driver of our implementation is obtaining the associated actions of these child nodes to append to the frontier of the search algorithm, which in this case is represented using a stack as a data structure. This is where relevance scores are computed and assigned to each possible keyword-link pairing.
+It is crucial that in our system, every assignment of a wikipedia link to a keyword can effectively increase the accuracy of the next assignments our algorithm chooses. By accuracy, we refer to the number of ``correct'' keyword-link pairings in an input that we know are correct based on a testing set.
 \\ \\
-Obtaining the child states for a given state will be as follows
+As an example, consider when the input text to our system is the sentence ``Steve Jobs was fantastic at Apple''. Our system will take in the input and preprocess it and find an initial, complete assignment of links for each keyword. Say we are have assigned Steve Jobs to his respective wikipedia page and that we have assigned Apple to the wikipedia page for the fruit. When our system iterates over the assignments of our input after this initial assignment and reaches Apple, it will consider that Steve Jobs was assigned to the wikipedia page for the CEO of Apple Inc, and now the possible candidate link space of the keyword Apple will change from
+$$\mbox{{\sc Candidates}}(Apple) = \{Apple (Fruit), \ Apple Inc., ...\}$$
+to simply contain
+$$\mbox{{\sc Candidates}}(Apple) = \{Apple \ Inc.\}$$
+Which is the correct assignment for Apple in this context.
+\\ \\
+One of the problems we encounter above is the task of semantic-relatedness - that is, how can we quantify a keyword-link pairing as correct or incorrect and how can we use the corpus of the wikipedia pages corresponding to the other link assignments to make a current assignment better. However, It might not be the case that a particular future assignment has any dependence on the previous ones or the other entities around it. We will discuss possible ways of solving this problem by using our problem formulation while at the same time identifying the inherent limitations of capturing qualitative notions of relatedness through specific numerical assignments, both in this approach and in the greater field of natural language processing.
 
-\begin{enumerate}
-  \item Choose a keyword to assign based on the most-constrained keyword heuristic
-  \item Query the wikipedia API for every possible candidate link that keyword can take. Other literature on entity-linking mentions that “candidate generation is critical for successful named-entity linking” (Hachey 40), but our implementation already does this by abstracting this through the wikipedia API
-  \item Compute the relevance score between every possible link and the given keyword
-  \item Return a list of triples of the form $$[(\mbox{keyword, link, score}), \ ... \ ]$$ that includes all possible candidate links and their associated score for a given keyword.
-\end{enumerate}
-Afterwards, we build dictionaries for all of the possible resulting states from this list of successor states and we can push them to the search algorithm’s frontier.
+\section{Problem Formulation}
 
-Our algorithm ends when we find a state that has every keyword assigned with a relevance score of at least a certain value, $\gamma$ we decide between 0 and 1. This logic is implemented in the {\sc isGoalState} function which checks for a terminal state in our implementation as in the AIMA algorithmic description. This is a score cutoff that can be modified at run time and we will discuss its limitations and the benefits of choosing different values of $\gamma$ in following sections. Now we discuss the aspect of our implementation that frames the problem as deterministic classical search and - the most-constrained keyword heuristic.
+We will begin by formulating our problem as we do in class
+\\ \\
+Our algorithm first takes in a block of text and preprocesses it to obtain the keywords and build up our initial state of our search problem as a dictionary where the keys are the keywords and the values are their respective wikipedia page assignments which are initially set to be the highest relevance scoring candidate link for that word and its corresponding relevance score, such as $\{keyword: \ (link, \ score), \ ...\}$. Our initial input could be ``An airplane has a heavy wing'', and our preprocessed initial state will be a dictionary of the form $$\{airplane: \ (candidateLink_1, \ 0.7553), \ wing: \ (candidateLink_2,  \ 0.8483)\}$$
+which will be what our search formulation will begin with. The next step is using a variant of local search that can modify this complete and potentially inconsistent assignment into a complete assignment that can be highly accurate after many iterations. Now we describe how an initial state is obtained and how its context is then processed to improve every link assignment.
 
-\subsection{Most-Constrained Keyword}
 
-Given a state, how does the algorithm determine the keyword to assign based on the other assignments? Ideally, we want to restrict the state space of every unassigned keyword based on the other assignments to find the one that has the smallest state space of possible link as in the \textit{Steve Jobs} and \textit{Apple} sxample in section 1.2. This is necessary for our algorithm to make sense as a classical search problem. We want to be able to use current assignments to help determine future ones, and using this abstraction will allow us to implement our solution effectively. However, we run into the problem of linking-dependence vs. linking-independence as introduced in section 1.2. To solve this problem, we calculate the linking-dependence between two keywords by using the cosine similarity measure discussed in the following section. We then introduce an extra parameter, a \textit{linking-dependence threshold} $\psi$, that can be modified at run-time arbitrarily. The efficacy of different choices of $\psi$ will be discussed in section 4 as part of the algorithmic limitations of our implementation. If two keywords are dependent on each other enough to have a similarity score above $\psi$, the algorithm will restrict the state space of the keywords accordingly as in the example.
+
+\subsection{High Level Description: Obtaining an Initial State}
+Our system first identifies the key terms in an input using NLTK. Now for each keyword, we obtain the set of its candidate links using the Wikipedia python API. For every candidate link, obtain its relevance score to the input text. At the end, we obtain the link that has the maximum relevance score and assign it to its keyword. We return an initial state as described in our formulation, where it is a dictionary with each keyword being a key and the values being their corresponding maximum relevance scoring link and the associated score. Obtaining the maximum link relevance score is described below.
 
 \begin{lstlisting}
-def mostConstrainedKeyword(state, alpha):
-    # State spaces is a dictionary where the keys
-    # are the keywords and the values are a list
-    # of possible links
-    stateSpaces = {}
-    # We initialize the state spaces for the
-    # unassigned keywords
-    for keyword in unassignedKeywords(state):
-        stateSpaces[keyword] = wikipedia.search(keyword)
+def getMaxRelevance(inputText, keyword):
+    linkRelevanceScores = []
+    for candidateLink in candidateLinks(keyword):
+        score = relevance(inputText, candidateLink)
+        linkRelevanceScores.append((candidateLink, score))
 
-    # Now for each keyword, we restrict its state
-    # space based on all the other assigned keywords
-    for keyword in stateSpaces:
-        for assignedKeyword in assignedKeywords(state):
-            # We deternine how related the two words are
-            # to each other and only restrict the keyword's
-            # state space if the score is greater than
-            # a predetermined threshold
-            score = linkingDependenceScore(keyword, assignedKeyword)
-            if score >= alpha:
-                restrictStateSpace(keyword, assignedKeyword)
+        return tuple of (candidateLink, score) with the maximum score in linkRelevanceScores
 
-    return keyword with min(stateSpaces)
 \end{lstlisting}
-
 
 \subsection{The Relevance Function}
 Given a link, a keyword, and a current state, how do we determine if that link is the best fit for that keyword effectively using the context given to us? In our implementation, there is a crucial consideration: we must be able to somehow use previous assigned keywords as factors in our score. This means that given the content of a wikipedia link, we must use the current keyword and the keywords around it to gauge how good of a match that link is to our current keyword. To accomplish this task, we will discuss several implementations of different measures of semantic-relatedness and approaches that have been used in literature to take advantage of the structured corpora of wikipedia.
+
+As abstractions in our implementation, we define the {\sc LinkRelevance} as the relevance score between a wikipedia link`s page content and the input text to our system and the {\sc DocumentRelevance} as the relevance score between two different wikipedia pages` content.
 \\ \\
-Formally, we define the relevance function as
-$$R: \mathcal{S} \times \ \mathcal{L} \times \ \mathcal{W} \rightarrow [0, 1]$$
-Where $\mathcal{S}$ is the state space of our search formalism
-\\
-$\mathcal{L}$ is the space of candidate links a particular keyword can take
-\\
-$\mathcal{W}$ is the space of keywords in our given state, which are simply the keys of our dictionary in our implementation.
+Formally, we define the functions above as
+$$\mbox{\sc LinkRelevance}: \mathcal{L} \times \ \mathcal{W}  \rightarrow [0, 1]$$
+$$\mbox{\sc DocumentRelevance}: \mathcal{L} \times \ \mathcal{L}  \rightarrow [0, 1]$$
+Where $\mathcal{L}$ is the space of candidate links a particular keyword can take and $\mathcal{W}$ is the space of words in our input text
 \\ \\
-Our relevance function formally abstracts the notion of semantic relatedness by disambiguating a keyword and link and capturing the best match with a score assigned to it. To begin to implement it, we define the following key terms
-$$\eta = \{w \in \mathcal{W} - \{c\} \ | \ c = \mbox{current keyword}\} $$
-$$\mbox{Similarity} = \cos(A, B) = \frac{A \cdot B}{||A|| ||B||} = \frac{\sum_{i=1}^{n} A_iB_i}{\sqrt{\sum_{i=1}^{n} A_i^2} \cdot \sqrt{\sum_{i=1}^{n} B_i^2}}$$
-Where $\eta$ we define as the \textit{context} of a given keyword and \textit{Similarity} is the \textit{cosine similarity} between two vectors, which is chosen to enforce a relevance score between 0 and 1. We will also use Term-Frequency Inverse-Document Frequency (TF-IDF) -  a statistic that scores the importance of certain terms based on two metrics
+Our relevance function formally abstracts the notion of semantic relatedness by capturing the best match between a keyword and a potential link with a score assigned to it. To begin to implement it, we define the following key terms
+$$\mbox{\sc Context} = \{w \in \mathcal{W} - \{c\} \ | \ c = \mbox{current keyword}\} $$
+$$\mbox{\sc Similarity} = \cos(A, B) = \frac{A \cdot B}{||A|| ||B||} = \frac{\sum_{i=1}^{n} A_iB_i}{\sqrt{\sum_{i=1}^{n} A_i^2} \cdot \sqrt{\sum_{i=1}^{n} B_i^2}}$$
+Where {\sc Similarity} is the cosine similarity between two vectors, which is chosen to enforce a relevance score between 0 and 1. We will also use Term-Frequency Inverse-Document Frequency (TF-IDF) -  a statistic that scores the importance of terms in a corpus based on two metrics:
 
 \begin{enumerate}
   \item weighing a term up if it appears frequently in a document
-  \item weighing a term down if it appears frequently in multiple documents. This will meaan it is most likely not a unique keyword
+  \item weighing a term down if it appears frequently in multiple documents. This will mean it is most likely not a unique keyword
 \end{enumerate}
 
 $$\mbox{TF-IDF} = \sqrt{f(k, p)} \cdot \log \left( \frac{|\mathcal{D}|}{\{d \in \mathcal{D} \ | \ k \in \mathcal{D}\}} \right) $$
-Where $k$ is the current keyword, $p$ is its candidate link's wikipedia page content, $f(k,p)$ is the term frequency of $k$ in $p$, $|\mathcal{D}|$ is the total number of wikipedia pages of the other keywords in the state, and $\{d \in \mathcal{D} \ | \ k \in d\}$ is the number of wikipedia pages corresponding to each of the other keywords that contain $k$ (Chisholm 149).
+Where $k$ is a current term, $p$ is its candidate link's wikipedia page content, $f(k,p)$ is the term frequency of $k$ in $p$, $|\mathcal{D}|$ is the total number of documents, and $\{d \in \mathcal{D} \ | \ k \in d\}$ is the number of documents that contain a current term, $k$ (Chisholm 149).
 
-The key to an effective relevance function will involve taking into account the similarity of the context of a given keyword to that keyword’s wikipedia entry using cosine similarity and encoding terms with TF-IDF weights. There are variations of this approach that have been successful in literature, but one that stands out over others (Citation Needed. It is the algorithm comparison paper) in terms of time and space complexity is known as Explicit Semantic Analysis. Dojchinovski provides a summary of the method, which we will work into our formulation and modify to implement our final relevance function through the following high-level description:
+The key to an effective relevance function will involve encoding terms with TF-IDF weights. There are variations of this approach that have been successful in literature, but one that stands out over others (Citation Needed. It is the algorithm comparison paper) in terms of time and space complexity is known as Explicit Semantic Analysis. Dojchinovski provides a summary of the method, which we will work into our formulation and modify to implement our final relevance function through the following high-level description:
 
-\textit{A selected keyword is preprocessed and represented as a TF-IDF term vector. For each keyword $w_i \in \eta$, the method retrieves the possible Wikipedia articles from the Wikipedia API $c_1,... ,c_n$ containing $w_i$. The semantic relatedness of the word $w_i$ with candidate link $c_j$ is computed such that the similarity of association between $w_i$ and $c_j$ is multiplied with the TF-IDF weight of $w_i$. The relatedness score for any two documents is determined by computing the cosine similarity between the vectors of this candidate link and keyword semantic relatedness.} (Dojchinovski 3).
+\textit{A selected keyword is preprocessed and represented as a TF-IDF term vector. For each keyword $w_i \in \mbox{\sc Context}$, the method retrieves the possible Wikipedia articles from the Wikipedia API $c_1,... ,c_n$ containing $w_i$. The semantic relatedness of the word $w_i$ with candidate link $c_j$ is computed such that the similarity of association between $w_i$ and $c_j$ is multiplied with the TF-IDF weight of $w_i$. The relatedness score for any two documents is determined by computing the cosine similarity between the vectors of this candidate link and keyword semantic relatedness.} (Dojchinovski 3).
 
-This is how the relevance score will be assigned and calculated when each node is expanded into child nodes within the classical search formulation.
+The relevance computed in the previous section is the {\sc LinkRelevance}, which only takes into account the input text and a candidate link. However, the {\sc DocumentRelevance} will be useful when using previous link assignments to determine a next assignment in our formulation.
+
+
+\subsection{High Level Description: Using Context to Improve Link Assignments}
+
+We now formulate a new algorithm based on the local search formulation we have previously seen in the course. We begin with an initial complete assignments of links to keywords from the previous section. Then, we iteratively implement the following process: for every keyword in the state in some order such as left to right, we compare each of its candidate links to all the other assigned links in the state using {\sc DocumentRelevance} and obtain the sum of these document relevances. We do a convex combination of both {\sc LinkRelevance} and this sum of {\sc DocumentRelevance} for every candidate link and the currently assigned link. If we find that this combined value for a candidate link is greater than the current assignment, we replace that assignment. At the end, we return the modified initial state. This is similar to every action taken in a local search formulation, where the neighbors of a given state are obtained and modified until a consistent assignment is reached. In this formulation, there is no definite formalization of a consistent assignment, so we will simply repeat this process for N iterations, where N is large enough to improve the scoring of each keyword-link assignment over time in our terminal state.
+
+Since {\sc DocumentRelevance} and {\sc LinkRelevance} measure two different quantities, we can do a comparison between them through a convex combination that introduces a new parameter, $\alpha \in [0, 1]$ that can weigh both against each other. We can obtain a measure that captures both into a single value, $\psi$.
+
+$$ \psi = (1-\alpha)\cdot\mbox{\sc LinkRelevance} + \alpha\cdot\mbox{\sc DocumentRelevance}$$
+
+Where document relevance is calculated between a link and every other assigned link in a state. We can use this as follows: when considering a candidate link for a keyword, we can compute its value of $\psi$ and also compute the value of $\psi$ for the currently assigned link. If the candidate link has a higher resulting $\psi$ value, we can replace the current assignment with this candidate link and move on to the next keyword. It could be the case that $\alpha = 0$, the case where only link-relevance is considered, could give a decently accurate set of assignments in our system. However, we want to explore values for $0 < \alpha \leq 1$ that can give us an increase in accuracy by considering the context of a keyword to determine the best candidate links.
+
+We implement these procedures as shown below
+
+\begin{lstlisting}
+def runLocalSearch(self, state, alpha, iterations):
+    for i in range(iterations):
+        for keyword in state:
+            for candidateLink in candidateLinks(keyword):
+                candidateDocumentRelevances = []
+                currentAssignmentDocumentRelevances = []
+                for otherAssignedLink in context(keyword):
+                    # Obtain the Document Relevances as a list
+                    candidateDocumentRelevances.append(documentRelevance(candidateLink, otherAssignedLink)
+                    currentLinkDocumentRelevances.append(documentRelevance(currentLink, assignedLink)
+
+                # Obtain the LinkRelevances
+                currentLinkRelevance = linkRelevance(keyword, currentLink)
+                candidateLinkRelevance = linkRelevance(keyword, candidateLink)
+
+                # Obtain a convex combination of the link relevances and the
+                # sum of the document relevances
+                candidatePsi = (1 - alpha)*candidateLinkRelevance + alpha*sum(candidateDocumentRelevances)
+                currentPsi = (1 - alpha)*currentLinkRelevance + alpha*sum(currentLinkDocumentRelevances)
+
+
+                # If the candidate link's convex combination is greater than the current
+                # link's convex combination, we replace that assignment
+                if candidatePsi > currentPsi:
+                    replaceAssignment(keyword, candidateLink)
+
+    return initialState
+\end{lstlisting}
+
+\section{Algorithmic Optimizations}
+
+One way we optimized our algorithm to account for the high number of iterations over the wikipedia search results from the API calls in our system was to cache the entire candidate link set for a keyword in memory. This way we can have constant access to the corpus of wikipedia pages every time we need to perform a relevance score computation or even when assigning a link to a keyword. Our system takes a long time to cache the results at first, but the following computations will be entirely dependent on our implementation afterwards.
+
+Another problem we optimized was the ordering heuristic within our algorithms. As we have seen before in Constraint Satisfaction Problems that used local search to arrive at complete and consistent assignments, iterating over keywords from left to right when modifying assignments may not necessarily be the best or most efficient ordering heuristic. We would instead want to change a keyword-link assignment that has the smallest possible candidate link space in our algorithm and proceed in that order.
+
+
+\subsection{Smallest Candidate Link Space Heuristic}
+
+Given a state, how does the algorithm determine the keyword to assign based on the other assignments? Ideally, we want to restrict the state space of every unassigned keyword based on the other assignments to find the one that has the smallest space of candidate links as in the \textit{Steve Jobs} and \textit{Apple} example of section 1.2. This is necessary for our algorithm to make sense as a search problem. We want to be able to use current assignments to help determine future ones, and using this abstraction will allow us to implement our solution effectively.
+
+\begin{lstlisting}
+def restrictCandidateLinkSpaces(keywords):
+    # For each keyword, we keep track of its space of candidate links
+    candidateLinkSpaces = {}
+    # We initialize the state spaces for the
+    # unassigned keywords
+    for keyword in keywords
+        # Obtains the list of candidate links for a keyword
+        candidateLInkSpaces[keyword] = wikipedia.search(keyword)
+
+    # Now for each keyword, we restrict its state
+    # space based on all the other assigned keywords
+    for keyword in keywords:
+        # Determine how related the keyword is to the context.
+        # For each link in the state space, calculate the relevance
+        # to the context of the keyword and restrict state space to eliminate
+        # low scoring links
+        for link in candidateLinkSpaces[keyword]:
+           candidateLinkSpaces[keyword] =  findRelevanceAndRestrictStateSpace(keyword, link)
+
+\end{lstlisting}
+
+
 
 \section{Algorithmic Analysis \& Evaluation}
-As a way of assessing algorithmic efficiency, we begin by determining the time complexity of the approaches we followed. We know from AIMA that Depth First Search runs in polynomial time, specifically $O(b^d)$ where $b$ is the branching factor and $d$ is the depth of our solution. Our  choice of encoding states as dictionaries of keyword-link mappings allows many of our subroutines to have constant time access to viewing and modifying these states, reducing the overhead from the problem formulation. However, there are additional factors in our implementation that can significantly slow down its run-time. The most-constrained keyword heuristic runs at $O(n + s\cdot n) = O(s\cdot n)$ complexity where $n = |\mbox{{\sc UnassignedKeywords}}|$, the length of the space of unassigned keywords and $s = |\mbox{{\sc AssignedKeywords}}|$ - an inefficient $O$.
 
-Additionally, the relevance function subroutine utilizes TF-IDF in its implementation, an algorithm known to have a worst-case running time of $O(|N|\cdot|V|)$ where $N$ is the corpus of the wikipedia page of a keyword and $V$ is the space of all candidate links for that keyword. Using an inverted index, however, can improve TF-IDF to $O(|B|\cdot|V|)$ where B is the average over all terms in the query document of the number of other documents
-in which a keyword appears (Salakhutdinov 2). Reducing the overhead of all these subroutines will be implementation-dependent and will only be practically efficient for a set of input text with very small cardinality.
+As a way of assessing algorithmic efficiency, we begin by determining the time complexity of the approaches we followed. Our  choice of encoding states as dictionaries of keyword-link mappings allows many of our subroutines to have constant time access to viewing and modifying these states, reducing the overhead from the problem formulation. However, there are additional factors in our implementation that can significantly slow down its run-time. The relevance function subroutine utilizes TF-IDF in its implementation, an algorithm known to have a worst-case running time of $O(|N|\cdot|V|)$ where $N$ is the corpus of the wikipedia page of a keyword and $V$ is the space of all candidate links for that keyword. Using an inverted index, however, can improve TF-IDF to $O(|B|\cdot|V|)$ where B is the average over all terms in the query document of the number of other documents.
 
-\subsection{Implementation Critique}
-Our implementation is highly constrained by the rate-limit and speed of the API calls we use from the Wikipedia python library.
+in which a keyword appears (Salakhutdinov 2). Reducing the overhead of all these subroutines will be implementation-dependent and will only be practically efficient for a set of input text with small size. Our large amount of API calls to obtain the text content of a wikipedia link are inefficient only at the start of our algorithm where we fetch every possible page content for the candidate links in our input and cache them in local memory. Once the cache is built, our algorithm will be purely dependent on the python runtime and on our implementation. The calculations involved in finding the relevance and cosine similarity are built upon the Natural Language Toolkit (NLTK) and Scikit-Learn as well as NumPy, which all have very optimized runtimes built upon lower-level C bindings, so they are the best approach to the more computation-intensive tasks of our system.
+
 \section{Algorithmic Limitations}
-Currently our search formulation is highly parameter-dependent. The accuracy of our entity-linking directly relies on the choice of $\gamma$ (the relevance score threshold), which has to do with determining how high a value of a relevance score will determine a terminal state in the search problem, and $\psi$ (the linking-dependence threshold) which determines how related two keywords are to each other in a given state.
 
-Additionally, our system only works for single-word entity linking. This means that we cannot link bigrams such as ``Steve Jobs'' or any n-grams for $n > 1$. The algorithms are also limited to the extent of how powerful the wikipedia API is to fetch the set of candidate links it believes best match a given keyword and we depend on this for the expansion of a node within the different search algorithms.
+Currently, our formulation simply iterates for a set number of iterations to improve the accuracy of the keyword-link assignments, but there is no set number of iterations that will guarantee us the best solution to human levels. Also, we are highly limited by underlying methods of our relevance function, namely TF-IDF and the cosine similarity of the vector space model. In particular, this approach does not take into account the ordering of words within a wikipedia page content, and assumes that all the terms are independent statistically, which is not the case in practice. Also, our improvement of linking accuracy relies on the choices of $\alpha$ through convex combinations of {\sc LinkRelevance} and {\sc DocumentRelevance}, which is a very problem-specific heuristic that would be difficult to expand outside of this problem domain. TF-IDF weighting also causes the problem of poorly representing pages with long content because of the high dimensionality of the weighted vector, which is the opposite of what we would intuitively need. For example, a longer page usually means that there is a lot of data and knowledge on the topic at hand and might be one of the most possible links to a keyword in an input.
 
-\section{System Feature Testing}
+\section{Testing of Major System Features}
 
-Our system testing will rely on measuring the running time of multiple examples provided to the system using 4 key metrics as described in (Citation Needed). We can now frame our parameter-based system as an optimization problem, where we find the optimal values of $\gamma$ and $\psi$ that maximize candidate accuracy for values from 0 to 1 in our system. We run our system and measure these different metrics
+Include a description of the testing data you used and a discussion of examples that illustrate major features of your system. Testing is a critical part of system construction, and the scope of your testing will be an important component in our evaluation.
+Our system testing will rely on measuring the linking accuracy of our search optimizations. We define linking accuracy as the percentage of correctly linked entities in a given input text. We will begin with a testing set of sample raw text we have created along with a solution set corresponding to each of those texts with their entities correctly linked to what we know are their right wikipedia pages. We will run every text in this testing set on our system, and measure the number of correctly named entities per input when compared to the solution set with a different number of iterations.
+We will perform the same test, but by changing the parameter $\alpha$ in our convex combination of {\sc LinkRelevance} and {\sc DocumentRelevance} at a different range of values and analyze how the accuracy of our system changes based on an increase in choice of $\alpha$. We present these results in section 8.
 
 
-\section{Key Takeaways From Implementation}
-Takeaways
+\section{Key Takeaways from Algorithmic Implementation}
+
+Our implementation has taught us that there is still a lot of work to be done in effective and fast entity linking systems. As an active area of research in NLP, even using the best python packages for the task, we still encountered many difficulties with achieving human-level effectiveness in this problem, and also discovered how difficult it is to create effective formalisms for systems dealing with language in this manner.
+
 \section{Empirical \& Graphical Results}
 
 \section{Appendix I}
- A trace of the program showing how it handles key examples or some other demonstration of the program in action.
+We can run our program for $\alpha = 0$ and for one iteration as follows on an input of related entities like
+\\ \\
+python core.py ``Thermodynamics is the study of heat'' \texttt{-{}-}iterations 1 \texttt{-{}-}alpha 0
+\\ \\
+we obtain
+\\ \\
+If we run the same example for 5 iterations and an alpha of 1 we obtain
+\\ \\
+Now for an alpha value of 0.5 we obtain
 \section{Appendix II}
-A clear description of how to use your system and how to generate the output you discussed in the write-up and the example transcript in Appendix 1. N.B.: The teaching staff must be able to run your system.
+To run our system, download the code in our Github Repository
+ \url{https://github.com/rauljordan/OptimizedEntityLinking}
+and navigate to the OptimizedEntityLinking subfolder within it. From there, run python core.py with the following options
+\\ \\
+python core.py ``Airplanes are aircraft'' \texttt{-{}-}iterations 10 \texttt{-{}-}alpha 0.1
+\\ \\
+Where the argument after core.py is the text you wish to provide, iterations is the number of iterations that our search will perform before returning a final state, and alpha is the convex combination parameter described in section 2.3 that can take values in the range 0 to 1. The default value of iterations is 1 and the default alpha is 0. The system will then print out to the console the different stages of the algorithms and their runtime, and will end by printing out a terminal state where all the keywords are linked to their corresponding wikipedia pages. A sample output of a terminal state is
+$$\{airplanes: \ (wikipedia.org/Airplane, \ 0.983), \ aircraft: \ (wikipedia.org/Aircraft, \ 0.983)\}$$
 \section{Appendix III}
-A list of each project participant and that participant’s contributions to the project. If the division of work varies significantly from the project proposal, provide a brief explanation.
+Raul focused on developing the report for the project as well as formulating the problem in terms of concepts used in class. Melissa focused on the design and presentation of our project. Sameer focused on developing the code base as well as the algorithmic development of our project.
 \vskip 0.2in
 \bibliography{sample}
 \bibliographystyle{theapa}

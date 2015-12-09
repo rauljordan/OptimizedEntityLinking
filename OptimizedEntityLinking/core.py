@@ -9,7 +9,7 @@ of the classical search formulation, as well as
 access to the different relevance function classes
 """
 
-import search
+from search import LocalSearch
 import nltk
 import cache
 
@@ -17,6 +17,9 @@ import cache
 class EntityLinker(object):
     """Implements the base entity linking class
     that can be called at runtime"""
+    def __init__(self, alpha, iterations):
+        self.alpha = alpha
+        self.iterations = iterations
 
     def link(self, words):
         print 'Preprocessing Input...'
@@ -24,11 +27,10 @@ class EntityLinker(object):
         print 'fetching cache...'
         c = cache.getCache(processedWords)
         print 'Linking Input...'
-        searchAgent = search.LocalSearch(processedWords, c)
-        print searchAgent.getInitialState()
-        #result = searchAgent.run()
-        #print self.prettify(result)
-        print 'Finished in 10 seconds'
+        searchAgent = LocalSearch(processedWords, c)
+        result = searchAgent.runLocalSearch(self.alpha, self.iterations)
+        print self.prettify(result)
+
 
     def prettify(self, state):
         """Prettifies the links in a terminal state"""
@@ -56,7 +58,5 @@ class EntityLinker(object):
 
 
 if __name__ == '__main__':
-    el = EntityLinker()
-    #el.link('Thermodynamics is the study of heat and heat-transfer')
-    el.link("The quick brown fox jumped over the lazy dog. Then the lazy brown dog took an adderall and crushed a paper.")
-
+    el = EntityLinker(0, 1)
+    el.link("Thermodynamics is the study of heat")
