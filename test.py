@@ -5,7 +5,7 @@ import json
 import ast
 import numpy as np
 
-alphas = [0]
+alphas = [0,0.25,0.5,0.75,1]
 
 with open('test/solutions.txt') as f:
     solutions = []
@@ -24,50 +24,27 @@ with open('test/testset.txt') as f:
 
             currentSolution = solutions[i]
             result = el.link(line)
-
+            print "result is:"
+            print result
+            print "solution is:"
+            print currentSolution
             totalKeywords = len(result.keys())
             correctKeywords = 0
             for k in result:
-                if result[k][0] == currentSolution[k]:
+                print result[k][0]
+                print currentSolution[k][0]
+                print result[k][0] == currentSolution[k][0]
+                if result[k][0] == currentSolution[k][0]:
                     correctKeywords += 1
-
+            print "correctKeywords: "
+            print correctKeywords
+            print "totalKeywords"
+            print totalKeywords
             accuracies.append(correctKeywords / totalKeywords)
-
+            print "accuracies:"
+            print accuracies
         avg_accuracies.append(np.mean(accuracies))
+        accuracies = []
+        f.seek(0)
         
 print avg_accuracies
-
-
-
-# import nltk 
-# with open('sample.txt', 'r') as f:
-#     sample = f.read()
-
-
-# sentences = nltk.sent_tokenize(sample)
-# tokenized_sentences = [nltk.word_tokenize(sentence) for sentence in sentences]
-# tagged_sentences = [nltk.pos_tag(sentence) for sentence in tokenized_sentences]
-# chunked_sentences = nltk.ne_chunk_sents(tagged_sentences, binary=True)
-
-# def extract_entity_names(t):
-#     entity_names = []
-#     if hasattr(t, 'label') and t.label:
-#         if t.label() == 'NE':
-#             entity_names.append(' '.join([child[0] for child in t]))
-#         else:
-#             for child in t:
-#                 entity_names.extend(extract_entity_names(child))
-#     return entity_names
-
-# entity_names = []
-# for tree in chunked_sentences:
-#     # Print results per sentence
-#     # print extract_entity_names(tree)
-#     print chunked_sentences
-#     entity_names.extend(extract_entity_names(tree))
-
-# # Print all entity names
-# # print entity_names
-
-# # Print unique entity names
-# print set(entity_names)

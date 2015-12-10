@@ -73,7 +73,7 @@ Our new approach formulates named-entity linking (NEL) as a search problem by as
 
 It is crucial that in our system, every assignment of a wikipedia link to a keyword can effectively increase the accuracy of the next assignments our algorithm chooses. By accuracy, we refer to the number of ``correct'' keyword-link pairings in an input that we know are correct based on a testing set.
 \\ \\
-As an example, consider when the input text to our system is the sentence ``Steve Jobs was fantastic at Apple''. Our system will take in the input and preprocess it and find an initial, complete assignment of links for each keyword. Say we have assigned Steve Jobs to his respective wikipedia page and that we have assigned Apple to the wikipedia page for the fruit. When our system iterates over the assignments of our input after this initial assignment and reaches Apple, it will consider that Steve Jobs was assigned to the wikipedia page for the CEO of Apple Inc, and now the possible candidate link space of the keyword Apple will change from
+As an example, consider when the input text to our system is the sentence ``Jobs was fantastic at Apple''. Our system will take in the input and preprocess it and find an initial, complete assignment of links for each keyword. Say we have assigned [Steve] Jobs to his respective wikipedia page and that we have assigned Apple to the wikipedia page for the fruit. When our system iterates over the assignments of our input after this initial assignment and reaches Apple, it will consider that [Steve] Jobs was assigned to the wikipedia page for the CEO of Apple Inc, and now the possible candidate link space of the keyword Apple will change from
 $$\mbox{{\sc Candidates}}(Apple) = \{Apple (Fruit), \ Apple Inc., ...\}$$
 to simply contain
 $$\mbox{{\sc Candidates}}(Apple) = \{Apple \ Inc.\}$$
@@ -195,7 +195,7 @@ Another problem we optimized was the ordering heuristic within our algorithms. A
 
 \subsection{Smallest Candidate Link Space Heuristic}
 
-Given a state, how does the algorithm determine the keyword to assign based on the other assignments? Ideally, we want to restrict the state space of every unassigned keyword based on the other assignments to find the one that has the smallest space of candidate links as in the \textit{Steve Jobs} and \textit{Apple} example of section 1.2. This is necessary for our algorithm to make sense as a search problem. We want to be able to use current assignments to help determine future ones, and using this abstraction will allow us to implement our solution effectively.
+Given a state, how does the algorithm determine the keyword to assign based on the other assignments? Ideally, we want to restrict the state space of every unassigned keyword based on the other assignments to find the one that has the smallest space of candidate links as in the \textit{Jobs} and \textit{Apple} example of section 1.2. This is necessary for our algorithm to make sense as a search problem. We want to be able to use current assignments to help determine future ones, and using this abstraction will allow us to implement our solution effectively.
 
 \begin{lstlisting}
 def restrictCandidateLinkSpaces(keywords):

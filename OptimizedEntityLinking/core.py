@@ -29,7 +29,7 @@ class EntityLinker(object):
         print 'Linking Initial Input...'
         searchAgent = LocalSearch(processedWords, c)
         result = searchAgent.runLocalSearch(self.alpha, self.iterations)
-        print self.prettify(result)
+        #print self.prettify(result)
         return result
 
     def prettify(self, state):
@@ -59,4 +59,4 @@ class EntityLinker(object):
 
 if __name__ == '__main__':
     el = EntityLinker(0.9999, 1)
-    el.link("Airplane! was a fantastic movie")
+    el.link("algorithm for finding an item with specified properties among a collection of items which are coded into a computer program")

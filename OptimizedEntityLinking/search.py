@@ -48,7 +48,6 @@ class LocalSearch(object):
                         currentLinkDocumentRelevances.append(currentLinkScore)
 
                     # Obtain the LinkRelevances
-                    print "getting link relevances"
                     assignedPage = self.retrieveCachedPage(assignedLink)
                     candidatePage = self.retrieveCachedPage(candidateLink)
                     currentLinkRelevance = RelevanceModel.linkRelevance(self.keywords, assignedPage)
@@ -63,7 +62,7 @@ class LocalSearch(object):
 
                     # If the candidate link's convex combination is greater than the current
                     # link's convex combination, we replace that assignment
-                    if candidatePsi > currentPsi:
+                    if candidatePsi < currentPsi:
                         state[keyword] = (candidateLink, candidateLinkRelevance)
                         print "Replaced Link"
             print str(i + 1) + "/" + str(iterations) + " iterations complete"
