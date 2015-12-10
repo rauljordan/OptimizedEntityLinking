@@ -30,6 +30,7 @@ class EntityLinker(object):
         searchAgent = LocalSearch(processedWords, c)
         result = searchAgent.runLocalSearch(self.alpha, self.iterations)
         #print self.prettify(result)
+        print result
         return result
 
     def prettify(self, state):
@@ -58,5 +59,5 @@ class EntityLinker(object):
 
 
 if __name__ == '__main__':
-    el = EntityLinker(0.9999, 1)
-    el.link("algorithm for finding an item with specified properties among a collection of items which are coded into a computer program")
+    el = EntityLinker(1, 1)
+    el.link("Thermodynamics is the study of heat")
