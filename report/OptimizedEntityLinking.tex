@@ -137,11 +137,7 @@ Where {\sc Similarity} is the cosine similarity between two vectors, which is ch
 $$\mbox{TF-IDF} = \sqrt{f(k, p)} \cdot \log \left( \frac{|\mathcal{D}|}{\{d \in \mathcal{D} \ | \ k \in \mathcal{D}\}} \right) $$
 Where $k$ is a current term, $p$ is its candidate link's wikipedia page content, $f(k,p)$ is the term frequency of $k$ in $p$, $|\mathcal{D}|$ is the total number of documents, and $\{d \in \mathcal{D} \ | \ k \in d\}$ is the number of documents that contain a current term, $k$ (Chisholm 149).
 
-<<<<<<< HEAD
-The key to an effective relevance function will involve encoding terms with TF-IDF weights. There are variations of this approach that have been successful in literature, but one that stands out over others (Milne 25) in terms of time and space complexity is known as Explicit Semantic Analysis. Dojchinovski provides a summary of the method, which we will work into our formulation and modify to implement our final relevance function through the following high-level description:
-=======
 The key to an effective relevance function will involve encoding terms with TF-IDF weights. There are variations of this approach that have been successful in literature, but one that stands out over others (Yano 9) in terms of time and space complexity is known as Explicit Semantic Analysis. Dojchinovski provides a summary of the method, which we will work into our formulation and modify to implement our final relevance function through the following high-level description:
->>>>>>> 157229de14b430ba5d910cfe1318c8d712625ece
 
 \textit{A selected keyword is preprocessed and represented as a TF-IDF term vector. For each keyword $w_i \in \mbox{\sc Context}$, the method retrieves the possible Wikipedia articles from the Wikipedia API $c_1,... ,c_n$ containing $w_i$. The semantic relatedness of the word $w_i$ with candidate link $c_j$ is computed such that the similarity of association between $w_i$ and $c_j$ is multiplied with the TF-IDF weight of $w_i$. The relatedness score for any two documents is determined by computing the cosine similarity between the vectors of this candidate link and keyword semantic relatedness.} (Dojchinovski 3).
 
