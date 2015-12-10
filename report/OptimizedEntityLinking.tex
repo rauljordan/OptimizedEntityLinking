@@ -146,13 +146,13 @@ The relevance computed in the previous section is the {\sc LinkRelevance}, which
 
 \subsection{High Level Description: Using Context to Improve Link Assignments}
 
-We now formulate a new algorithm based on the local search formulation we have previously seen in the course. We begin with an initial complete assignments of links to keywords from the previous section. Then, we iteratively implement the following process: for every keyword in the state in some order such as left to right, we compare each of its candidate links to all the other assigned links in the state using {\sc DocumentRelevance} and obtain the sum of these document relevances. We do a convex combination of both {\sc LinkRelevance} and this sum of {\sc DocumentRelevance} for every candidate link and the currently assigned link. If we find that this combined value for a candidate link is greater than the current assignment, we replace that assignment. At the end, we return the modified initial state. This is similar to every action taken in a local search formulation, where the neighbors of a given state are obtained and modified until a consistent assignment is reached. In this formulation, there is no definite formalization of a consistent assignment, so we will simply repeat this process for N iterations, where N is large enough to improve the scoring of each keyword-link assignment over time in our terminal state.
+We now formulate a new algorithm based on the local search formulation we have previously seen in the course. We begin with an initial complete assignments of links to keywords from the previous section. Then, we iteratively implement the following process: for every keyword in the state in some order such as left to right, we compare each of its candidate links to all the other assigned links in the state using {\sc DocumentRelevance} and obtain the sum of these document relevances. We do a convex combination of both {\sc LinkRelevance} and this sum of {\sc DocumentRelevance} for every candidate link and the currently assigned link. If we find that this combined value for a candidate link is less than the current assignment, we replace that assignment. At the end, we return the modified initial state. This is similar to every action taken in a local search formulation, where the neighbors of a given state are obtained and modified until a consistent assignment is reached. In this formulation, there is no definite formalization of a consistent assignment, so we will simply repeat this process for N iterations, where N is large enough to improve the scoring of each keyword-link assignment over time in our terminal state.
 
-Since {\sc DocumentRelevance} and {\sc LinkRelevance} measure two different quantities, we can do a comparison between them through a convex combination that introduces a new parameter, $\alpha \in [0, 1]$ that can weigh both against each other. We can obtain a measure that captures both into a single value, $\psi$.
+Since {\sc DocumentRelevance} and {\sc LinkRelevance} measure two different quantities, we can do a comparison between them through a convex combination that introduces a new parameter, $\alpha \in [0, 1]$ that can weigh both against each other. We can obtain a measure that captures both into a single value, $\psi$. We change the assigned link when the candidate has a smaller psi value because it is a convex combination.
 
 $$ \psi = (1-\alpha)\cdot\mbox{\sc LinkRelevance} + \alpha\cdot\mbox{\sc DocumentRelevance}$$
 
-Where document relevance is calculated between a link and every other assigned link in a state. We can use this as follows: when considering a candidate link for a keyword, we can compute its value of $\psi$ and also compute the value of $\psi$ for the currently assigned link. If the candidate link has a higher resulting $\psi$ value, we can replace the current assignment with this candidate link and move on to the next keyword. It could be the case that $\alpha = 0$, the case where only link-relevance is considered, could give a decently accurate set of assignments in our system. However, we want to explore values for $0 < \alpha \leq 1$ that can give us an increase in accuracy by considering the context of a keyword to determine the best candidate links.
+Where document relevance is calculated between a link and every other assigned link in a state. We can use this as follows: when considering a candidate link for a keyword, we can compute its value of $\psi$ and also compute the value of $\psi$ for the currently assigned link. If the candidate link has a lower resulting $\psi$ value, we can replace the current assignment with this candidate link and move on to the next keyword. It could be the case that $\alpha = 1$, the case where only document-relevance is considered, could give a decently accurate set of assignments in our system. However, we want to explore values for $0 < \alpha \leq 1$ that can give us an increase in accuracy by considering the context of a keyword to determine the best candidate links.
 
 We implement these procedures as shown below
 
@@ -178,9 +178,9 @@ def runLocalSearch(self, state, alpha, iterations):
                 currentPsi = (1 - alpha)*currentLinkRelevance + alpha*sum(currentLinkDocumentRelevances)
 
 
-                # If the candidate link's convex combination is greater than the current
+                # If the candidate link's convex combination is less than the current
                 # link's convex combination, we replace that assignment
-                if candidatePsi > currentPsi:
+                if candidatePsi < currentPsi:
                     replaceAssignment(keyword, candidateLink)
 
     return initialState

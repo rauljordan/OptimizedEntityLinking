@@ -59,5 +59,5 @@ class EntityLinker(object):
 
 
 if __name__ == '__main__':
-    el = EntityLinker(1, 1)
+    el = EntityLinker(0.1, 1)
     el.link("Thermodynamics is the study of heat")
