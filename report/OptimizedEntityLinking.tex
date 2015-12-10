@@ -242,9 +242,11 @@ We run our testing data for 1 iteration on 3 different choices of alpha. We will
 \begin{tabular}{cc}
 \hline
 \textbf{Alpha}            & \textbf{Average Accuracy Over All Test Data} \\ \hline
-\multicolumn{1}{|c|}{0}   & \multicolumn{1}{c|}{75\%}                    \\ \hline
-\multicolumn{1}{|c|}{0.5} & \multicolumn{1}{c|}{78\%}                    \\ \hline
-\multicolumn{1}{|c|}{1}   & \multicolumn{1}{c|}{40\%}                    \\ \hline
+\multicolumn{1}{|c|}{0}   & \multicolumn{1}{c|}{15.87\%}                    \\ \hline
+\multicolumn{1}{|c|}{0.25} & \multicolumn{1}{c|}{80.56\%}                    \\ \hline
+\multicolumn{1}{|c|}{0.5} & \multicolumn{1}{c|}{91.67\%}                    \\ \hline
+\multicolumn{1}{|c|}{0.75} & \multicolumn{1}{c|}{91.67\%}                    \\ \hline
+\multicolumn{1}{|c|}{1}   & \multicolumn{1}{c|}{91.67\%}                    \\ \hline
 \end{tabular}
 
 \section{Key Takeaways from Algorithmic Implementation}
@@ -252,27 +254,47 @@ We run our testing data for 1 iteration on 3 different choices of alpha. We will
 Our implementation has taught us that there is still a lot of work to be done in effective and fast entity linking systems. As an active area of research in NLP, even using the best python packages for the task, we still encountered many difficulties with achieving human-level effectiveness in this problem, and also discovered how difficult it is to create effective formalisms for systems dealing with language in this manner.
 
 \section{Appendix I}
-We can run our program for $\alpha = 0$ and for one iteration as follows on an input of related entities like
+We can run our program for $\alpha = 1$ and for one iteration as follows on an input of related entities like
 \\ \\
-python core.py ``Thermodynamics is the study of heat'' \texttt{-{}-}iterations 1 \texttt{-{}-}alpha 0
+python core.py ``Thermodynamics is the study of heat'' \texttt{-{}-}iterations 1 \texttt{-{}-}alpha 1
 \\ \\
 we obtain
-\mbox{Thermodynamics: (en.wikipedia.org/wiki/Thermodynamics, 0.40149447781747305)}
+\mbox{Thermodynamics: (en.wikipedia.org/wiki/Thermodynamics, 0.44943641652398209)}
 \\
-\mbox{Study: (en.wikipedia.org/wiki/Retrospective cohort study, 0.2515664918707764)}
+\mbox{Study: (en.wikipedia.org/wiki/Study, 0.44943641652398209)}
 \\
-\mbox{Heat: (u'en.wikipedia.org/wiki/Waste heat, 0.36609699772214532)}
+\mbox{Heat: (en.wikipedia.org/wiki/Heat, 0.44943641652398209)}
 \\ \\
 If we run the same example for 5 iterations and an alpha of 1 we obtain the same result
 \\ \\
+
 Now for an alpha value of 0.5
 \\
 we obtain
-\mbox{Thermodynamics: (en.wikipedia.org/wiki/Thermodynamics, 0.40149447781747305)}
+\mbox{Thermodynamics: (en.wikipedia.org/wiki/Thermodynamics, 0.44943641652398209)}
 \\
-\mbox{Study: (en.wikipedia.org/wiki/Retrospective cohort study, 0.2515664918707764)}
+\mbox{Study: (en.wikipedia.org/wiki/Study, 0.44943641652398209)}
 \\
-\mbox{Heat: (u'en.wikipedia.org/wiki/Heat, 0.7382838832833)}
+\mbox{Heat: (en.wikipedia.org/wiki/Heat, 0.44943641652398209)}
+
+Now for an alpha value of 0.1
+\\
+we obtain
+\mbox{Thermodynamics: (en.wikipedia.org/wiki/Third law of thermodynamics, 0.11145825029743928)}
+\\
+\mbox{Study: (en.wikipedia.org/wiki/Study, 0.44943641652398209)}
+\\
+\mbox{Heat: (en.wikipedia.org/wiki/Enthalpy of vaporization, 0.12731567199023894)}
+
+Now for an alpha value of 0.0
+\\
+we obtain
+\mbox{Thermodynamics: (en.wikipedia.org/wiki/Third law of thermodynamics, 0.11145825029743928)}
+\\
+\mbox{Study: (en.wikipedia.org/wiki/Study, 0.44943641652398209)}
+\\
+\mbox{Heat: (en.wikipedia.org/wiki/Enthalpy of vaporization, 0.12731567199023894)}
+
 \section{Appendix II}
 To run our system, download the code in our Github Repository
  \url{https://github.com/rauljordan/OptimizedEntityLinking} Download all the python package requirements by using the command env/bin/pip install -r requirements.txt and navigate to the OptimizedEntityLinking subfolder within it. From there, run python core.py with the following options
