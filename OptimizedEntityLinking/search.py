@@ -29,18 +29,27 @@ class LocalSearch(object):
                 assignedLink = state[keyword][0]
 
                 for candidateLink in candidateLinks:
+                    # Use Cache. duh.
+                    assignedPage = self.retrieveCachedPage(assignedLink)
+                    candidatePage = self.retrieveCachedPage(candidateLink)
+
                     candidateDocumentRelevances = []
                     currentLinkDocumentRelevances = []
                     context = [v[0] for k, v in state.items() if k != keyword]
+                    print "entering loop"
                     for otherAssignedLink in context:
+                        # get cached page
+                        otherAssignedPage = self.retrieveCachedPage(candidateLink)
+
                         # Obtain the Document Relevances as a list
-                        candidateScore = RelevanceModel.documentRelevance(candidateLink, otherAssignedLink)
+                        candidateScore = RelevanceModel.documentRelevance(candidatePage, otherAssignedPage)
                         candidateDocumentRelevances.append(candidateScore)
 
-                        currentLinkScore = RelevanceModel.documentRelevance(candidateLink, assignedLink)
+                        currentLinkScore = RelevanceModel.documentRelevance(candidatePage, assignedPage)
                         currentLinkDocumentRelevances.append(currentLinkScore)
 
                     # Obtain the LinkRelevances
+                    print "getting link relevances"
                     assignedPage = self.retrieveCachedPage(assignedLink)
                     candidatePage = self.retrieveCachedPage(candidateLink)
                     currentLinkRelevance = RelevanceModel.linkRelevance(self.keywords, assignedPage)
