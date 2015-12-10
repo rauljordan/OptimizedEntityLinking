@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.11)  10 DEC 2015 16:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.8.11)  10 DEC 2015 16:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -459,12 +459,6 @@ Missing character: There is no ¡ in font cmr10!
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 320.
-
-Underfull \hbox (badness 10000) in paragraph at lines 309--320
-
- []
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 309--320
 
@@ -491,15 +485,21 @@ Overfull \hbox (1.1361pt too wide) in paragraph at lines 309--320
 ti-fi-cial In-tel-li-gence, Chicago,
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 309--320
+
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 321.
 [11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 320.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 321.
  (./OptimizedEntityLinking.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 320.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 320.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 321.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 321.
 Package rerunfilecheck Info: File `OptimizedEntityLinking.out' has not changed.
 
 (rerunfilecheck)             Checksum: B4E4E90EC909FF375ACB15595AF8EB26;1170.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 320.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 321.
  ) 
 Here is how much of TeX's memory you used:
  6737 strings out of 494501
@@ -522,7 +522,7 @@ ype1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015basic/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2015basic/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015basic/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on OptimizedEntityLinking.pdf (11 pages, 202612 bytes).
+Output written on OptimizedEntityLinking.pdf (11 pages, 202617 bytes).
 PDF statistics:
  251 PDF objects out of 1000 (max. 8388607)
  223 compressed objects within 3 object streams
