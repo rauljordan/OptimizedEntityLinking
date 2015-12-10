@@ -36,7 +36,6 @@ class LocalSearch(object):
                     candidateDocumentRelevances = []
                     currentLinkDocumentRelevances = []
                     context = [v[0] for k, v in state.items() if k != keyword]
-                    print "entering loop"
                     for otherAssignedLink in context:
                         # get cached page
                         otherAssignedPage = self.retrieveCachedPage(candidateLink)

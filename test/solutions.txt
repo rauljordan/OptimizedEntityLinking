@@ -1,3 +1,3 @@
 {"Thermodynamics":('Thermodynamics', 1), "study":('Study', 1), "heat":('Heat', 1)}
 {"Airplane!":('Airplane!', 1), "movie":('movie', 1)}
-{"China":('China', 1), "GDP":('Gross domestic product', 1)}
+{"China":('China', 1), "country":('Country', 1), "GDP":('Gross domestic product', 1)}
