@@ -1,13 +1,14 @@
 Optimized Entity Linking Through Wikipedia
 ========
 
-### CS182
-Final Project
+## Overview
+We provide a simple interface for Named-Entity Linking and "wikification" of a passage of text using a variant of local search and the Wikipedia API as specified in our research paper 
+[Search Optimizations in Named Entity Linking Systems](http://example.net/). 
 
+Given a passage of text, such as "China has a large population", our system will link every keyword in that passage to its corresponding wikipedia page with a high confidence score through the modification of alpha, a parameter that can be specified at runtime.
 
-### License
+## How to Run 
 
-MIT License
 
 
 ### Issues
@@ -18,21 +19,7 @@ Please report any bugs or requests that you have using the GitHub issue tracker!
 
 If you wish to contribute, first make your changes. Then submit a pull request
 
-### Problems to be solved:
 
-GetSuccessors:
- - Given a word and the rest of the paragraph, how can we get a set of potentially accurat links describing that noun?
- - Simply go to disambiguation page for that noun
-
-Which words in an input should we choose to link?
-Given two links, how related are they?
-Given a word and a link, how related is the word to that link? (how many times does word appear in linked page?)
-Given a list of possible states (return value of GetSuccessors) how can we filter the results to relate to the original input?
-
-### Search Formalism
- - States:
-  List of keywords with their assigned links
- - Actions:
   Assign one link
  - 
 
