@@ -16,6 +16,8 @@ Now, navigate to the OptimizedEntityLinking folder and run
 
 Where the first argument to core.py is the input text you wish to provide, alpha is an accuracy parameter that can be tweaked to improve the accuracy of the system as described in the paper from 0 to 1, and iterations is the number of iterations you wish to run local search for. We recommend just one iteration for reasons of speed. 
 
+## Testing
+To run our tests, simply run `python test.py`, which will return a list of accuracy scores from 0 to 1 of different values of alpha as specified in the file. This runs the algorithm over different test examples and solutions to discover the accuracy of the entity linking as alpha changes. This is also mentioned within the paper. 
 
 ### Issues
 
@@ -24,8 +26,3 @@ Please report any bugs or requests that you have using the GitHub issue tracker!
 ### Development
 
 If you wish to contribute, first make your changes. Then submit a pull request
-
-
-  Assign one link
- - 
-
