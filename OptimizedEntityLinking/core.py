@@ -12,7 +12,7 @@ access to the different relevance function classes
 from search import LocalSearch
 import nltk
 import cache
-
+import argparse
 
 class EntityLinker(object):
     """Implements the base entity linking class
@@ -59,5 +59,16 @@ class EntityLinker(object):
 
 
 if __name__ == '__main__':
-    el = EntityLinker(0.1, 1)
-    el.link("Thermodynamics is the study of heat")
+    #el = EntityLinker(0.1, 1)
+    #el.link("Thermodynamics is the study of heat")
+    parser = argparse.ArgumentParser(description='Link entities to wikipedia pages')
+    parser.add_argument('text', metavar='text', type=str,
+                   help='input text you wish to provide')
+    parser.add_argument('--alpha', default=0.9, type=float,
+                   help='optimization parameter alpha (default: 0.9). Try different values to obtain better accuracy of your text linking')
+    parser.add_argument('--iterations', default=1, type=int,
+                   help='iterations: number of local search iterations to run search for. Default and recommended is 1 for speed purposes')
+
+    args = parser.parse_args()
+    el = EntityLinker(args.alpha, args.iterations)
+    el.link(args.text)
